@@ -3625,7 +3625,7 @@
         "z": "83859db467e828f0",
         "group": "2201aac984044be9",
         "name": "Moisture threshold",
-        "label": "Moisture threshold (%)",
+        "label": "slider",
         "tooltip": "",
         "order": 1,
         "width": 0,
