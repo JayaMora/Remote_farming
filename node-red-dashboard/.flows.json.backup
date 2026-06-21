@@ -79,6 +79,95 @@
         }
     },
     {
+        "id": "bde818e8fe258a58",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "247c990607f98efc",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "7921d2b595bab1f4",
+        "type": "ui-page",
+        "name": "Control Panel",
+        "ui": "bde818e8fe258a58",
+        "path": "/page6",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "247c990607f98efc",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 5,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "2201aac984044be9",
+        "type": "ui-group",
+        "name": "Field A",
+        "page": "7921d2b595bab1f4",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
         "id": "12cedcbb5353b4d2",
         "type": "ui-page",
         "name": "Overview",
@@ -122,7 +211,7 @@
         "path": "/page1",
         "icon": "home",
         "layout": "grid",
-        "theme": "9d38e46abd94d4f2",
+        "theme": "247c990607f98efc",
         "breakpoints": [
             {
                 "name": "Default",
@@ -149,98 +238,6 @@
         "className": "",
         "visible": "true",
         "disabled": "false"
-    },
-    {
-        "id": "6c5452f063a44bcc",
-        "type": "ui-page",
-        "name": "Settings",
-        "ui": "bde818e8fe258a58",
-        "path": "/settings",
-        "icon": "home",
-        "layout": "grid",
-        "theme": "9d38e46abd94d4f2",
-        "breakpoints": [
-            {
-                "name": "Default",
-                "px": "0",
-                "cols": "3"
-            },
-            {
-                "name": "Tablet",
-                "px": "576",
-                "cols": "6"
-            },
-            {
-                "name": "Small Desktop",
-                "px": "768",
-                "cols": "9"
-            },
-            {
-                "name": "Desktop",
-                "px": "1024",
-                "cols": "12"
-            }
-        ],
-        "order": 3,
-        "className": "",
-        "visible": "true",
-        "disabled": "false"
-    },
-    {
-        "id": "a3afd07bf4eb6f5d",
-        "type": "ui-page",
-        "name": "Charts",
-        "ui": "bde818e8fe258a58",
-        "path": "/page3",
-        "icon": "home",
-        "layout": "grid",
-        "theme": "9d38e46abd94d4f2",
-        "breakpoints": [
-            {
-                "name": "Default",
-                "px": "0",
-                "cols": "3"
-            },
-            {
-                "name": "Tablet",
-                "px": "576",
-                "cols": "6"
-            },
-            {
-                "name": "Small Desktop",
-                "px": "768",
-                "cols": "9"
-            },
-            {
-                "name": "Desktop",
-                "px": "1024",
-                "cols": "12"
-            }
-        ],
-        "order": 4,
-        "className": "",
-        "visible": "true",
-        "disabled": "false"
-    },
-    {
-        "id": "bde818e8fe258a58",
-        "type": "ui-base",
-        "name": "My Dashboard",
-        "path": "/dashboard",
-        "appIcon": "",
-        "includeClientData": true,
-        "acceptsClientConfig": [
-            "ui-notification",
-            "ui-control"
-        ],
-        "showPathInSidebar": false,
-        "headerContent": "page",
-        "navigationStyle": "default",
-        "titleBarStyle": "default",
-        "showReconnectNotification": true,
-        "notificationDisplayTime": 1,
-        "showDisconnectNotification": true,
-        "allowInstall": false
     },
     {
         "id": "bdbcc8d0b29be63b",
@@ -453,30 +450,11 @@
         "groupType": "default"
     },
     {
-        "id": "247c990607f98efc",
-        "type": "ui-theme",
-        "name": "Default Theme",
-        "colors": {
-            "surface": "#ffffff",
-            "primary": "#0094CE",
-            "bgPage": "#eeeeee",
-            "groupBg": "#ffffff",
-            "groupOutline": "#cccccc"
-        },
-        "sizes": {
-            "density": "default",
-            "pagePadding": "12px",
-            "groupGap": "12px",
-            "groupBorderRadius": "4px",
-            "widgetGap": "12px"
-        }
-    },
-    {
-        "id": "7921d2b595bab1f4",
+        "id": "a3afd07bf4eb6f5d",
         "type": "ui-page",
-        "name": "Control Panel",
+        "name": "Charts",
         "ui": "bde818e8fe258a58",
-        "path": "/page6",
+        "path": "/page3",
         "icon": "home",
         "layout": "grid",
         "theme": "247c990607f98efc",
@@ -502,247 +480,46 @@
                 "cols": "12"
             }
         ],
-        "order": 5,
+        "order": 4,
         "className": "",
         "visible": "true",
         "disabled": "false"
     },
     {
-        "id": "2201aac984044be9",
-        "type": "ui-group",
-        "name": "Field A",
-        "page": "7921d2b595bab1f4",
-        "width": 6,
-        "height": 1,
-        "order": 1,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "5858dc40e50f2e92",
-        "type": "inject",
-        "z": "c3cb9131a8cf95a3",
-        "name": "INject",
-        "props": [
+        "id": "6c5452f063a44bcc",
+        "type": "ui-page",
+        "name": "Settings",
+        "ui": "bde818e8fe258a58",
+        "path": "/settings",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "247c990607f98efc",
+        "breakpoints": [
             {
-                "p": "payload"
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
             },
             {
-                "p": "topic",
-                "vt": "str"
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
             }
         ],
-        "repeat": "3",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 100,
-        "y": 180,
-        "wires": [
-            [
-                "c65176a050443fc9",
-                "bb63735ad982a205",
-                "547901f58eab8610",
-                "5afcc619511ea737",
-                "99e3962c7d9fb86d"
-            ]
-        ]
-    },
-    {
-        "id": "c65176a050443fc9",
-        "type": "function",
-        "z": "c3cb9131a8cf95a3",
-        "name": "function 2",
-        "func": "msg.payload = (20 + Math.random() * 10).toFixed(1);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 180,
-        "wires": [
-            [
-                "58ea6ab57c0caaf9"
-            ]
-        ]
-    },
-    {
-        "id": "bb63735ad982a205",
-        "type": "function",
-        "z": "c3cb9131a8cf95a3",
-        "name": "Moisture",
-        "func": "msg.payload = Math.floor(Math.random() * 100);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 240,
-        "wires": [
-            [
-                "ff3f5eb5165d9d0c"
-            ]
-        ]
-    },
-    {
-        "id": "547901f58eab8610",
-        "type": "function",
-        "z": "c3cb9131a8cf95a3",
-        "name": "Rain",
-        "func": "msg.payload = Math.random() > 0.8 ? \"wet\" : \"dry\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 250,
-        "y": 320,
-        "wires": [
-            [
-                "4f26eec7b2fae353"
-            ]
-        ]
-    },
-    {
-        "id": "5afcc619511ea737",
-        "type": "function",
-        "z": "c3cb9131a8cf95a3",
-        "name": "Light",
-        "func": "msg.payload = Math.floor(Math.random() * 1000);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 270,
-        "y": 380,
-        "wires": [
-            [
-                "5023582c9265984a"
-            ]
-        ]
-    },
-    {
-        "id": "99e3962c7d9fb86d",
-        "type": "function",
-        "z": "c3cb9131a8cf95a3",
-        "name": "VAlve",
-        "func": "const value = parseFloat(msg.payload);\nmsg.payload = value > 0.5 ? \"OPEN\" : \"CLOSED\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 270,
-        "y": 440,
-        "wires": [
-            [
-                "552edd9ea78462c4"
-            ]
-        ]
-    },
-    {
-        "id": "58ea6ab57c0caaf9",
-        "type": "mqtt out",
-        "z": "c3cb9131a8cf95a3",
-        "name": "",
-        "topic": "field_a/temperature",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 470,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "ff3f5eb5165d9d0c",
-        "type": "mqtt out",
-        "z": "c3cb9131a8cf95a3",
-        "name": "",
-        "topic": "field_a/moisture",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 460,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "4f26eec7b2fae353",
-        "type": "mqtt out",
-        "z": "c3cb9131a8cf95a3",
-        "name": "",
-        "topic": "field_a/rain",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 450,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "5023582c9265984a",
-        "type": "mqtt out",
-        "z": "c3cb9131a8cf95a3",
-        "name": "",
-        "topic": "field_a/light",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 450,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "552edd9ea78462c4",
-        "type": "mqtt out",
-        "z": "c3cb9131a8cf95a3",
-        "name": "",
-        "topic": "field_a/valve",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 450,
-        "y": 440,
-        "wires": []
+        "order": 3,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
     },
     {
         "id": "3fe63e5473304ef1",
@@ -1058,6 +835,229 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "5858dc40e50f2e92",
+        "type": "inject",
+        "z": "c3cb9131a8cf95a3",
+        "name": "INject",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 180,
+        "wires": [
+            [
+                "c65176a050443fc9",
+                "bb63735ad982a205",
+                "547901f58eab8610",
+                "5afcc619511ea737",
+                "99e3962c7d9fb86d"
+            ]
+        ]
+    },
+    {
+        "id": "c65176a050443fc9",
+        "type": "function",
+        "z": "c3cb9131a8cf95a3",
+        "name": "function 2",
+        "func": "msg.payload = (20 + Math.random() * 10).toFixed(1);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 180,
+        "wires": [
+            [
+                "58ea6ab57c0caaf9"
+            ]
+        ]
+    },
+    {
+        "id": "bb63735ad982a205",
+        "type": "function",
+        "z": "c3cb9131a8cf95a3",
+        "name": "Moisture",
+        "func": "msg.payload = Math.floor(Math.random() * 100);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "ff3f5eb5165d9d0c"
+            ]
+        ]
+    },
+    {
+        "id": "547901f58eab8610",
+        "type": "function",
+        "z": "c3cb9131a8cf95a3",
+        "name": "Rain",
+        "func": "msg.payload = Math.random() > 0.8 ? \"wet\" : \"dry\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 320,
+        "wires": [
+            [
+                "4f26eec7b2fae353"
+            ]
+        ]
+    },
+    {
+        "id": "5afcc619511ea737",
+        "type": "function",
+        "z": "c3cb9131a8cf95a3",
+        "name": "Light",
+        "func": "msg.payload = Math.floor(Math.random() * 1000);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 380,
+        "wires": [
+            [
+                "5023582c9265984a"
+            ]
+        ]
+    },
+    {
+        "id": "99e3962c7d9fb86d",
+        "type": "function",
+        "z": "c3cb9131a8cf95a3",
+        "name": "VAlve",
+        "func": "const value = parseFloat(msg.payload);\nmsg.payload = value > 0.5 ? \"OPEN\" : \"CLOSED\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 440,
+        "wires": [
+            [
+                "552edd9ea78462c4"
+            ]
+        ]
+    },
+    {
+        "id": "ff3f5eb5165d9d0c",
+        "type": "mqtt out",
+        "z": "c3cb9131a8cf95a3",
+        "name": "",
+        "topic": "field_a/moisture",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f7fe60360238b079",
+        "x": 480,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4f26eec7b2fae353",
+        "type": "mqtt out",
+        "z": "c3cb9131a8cf95a3",
+        "name": "",
+        "topic": "field_a/rain",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f7fe60360238b079",
+        "x": 450,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "5023582c9265984a",
+        "type": "mqtt out",
+        "z": "c3cb9131a8cf95a3",
+        "name": "",
+        "topic": "field_a/light",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f7fe60360238b079",
+        "x": 450,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "552edd9ea78462c4",
+        "type": "mqtt out",
+        "z": "c3cb9131a8cf95a3",
+        "name": "",
+        "topic": "field_a/valve",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f7fe60360238b079",
+        "x": 450,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "58ea6ab57c0caaf9",
+        "type": "mqtt out",
+        "z": "c3cb9131a8cf95a3",
+        "name": "",
+        "topic": "field_a/temperature",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f7fe60360238b079",
+        "x": 470,
+        "y": 180,
+        "wires": []
     },
     {
         "id": "47b48c518714a4b6",
@@ -3625,7 +3625,7 @@
         "z": "83859db467e828f0",
         "group": "2201aac984044be9",
         "name": "Moisture threshold",
-        "label": "slider",
+        "label": "Moisture threshold (%)",
         "tooltip": "",
         "order": 1,
         "width": 0,
