@@ -2,7 +2,7 @@
     {
         "id": "c3cb9131a8cf95a3",
         "type": "tab",
-        "label": "Field A",
+        "label": "Field Main",
         "disabled": false,
         "info": "",
         "env": []
@@ -10,7 +10,7 @@
     {
         "id": "697288345ed13a06",
         "type": "tab",
-        "label": "Field B",
+        "label": "Field A",
         "disabled": false,
         "info": "",
         "env": []
@@ -18,7 +18,7 @@
     {
         "id": "c2fa9e34c92f937d",
         "type": "tab",
-        "label": "Field C",
+        "label": "Field B",
         "disabled": false,
         "info": "",
         "env": []
@@ -34,7 +34,23 @@
     {
         "id": "83859db467e828f0",
         "type": "tab",
-        "label": "Field A Control",
+        "label": "Field Main Control",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8b8f80d3498d1150",
+        "type": "tab",
+        "label": "Node Binding",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9e7d7c12d1458246",
+        "type": "tab",
+        "label": "Analytics",
         "disabled": false,
         "info": "",
         "env": []
@@ -150,13 +166,13 @@
         ],
         "order": 5,
         "className": "",
-        "visible": "true",
-        "disabled": "false"
+        "visible": true,
+        "disabled": false
     },
     {
         "id": "2201aac984044be9",
         "type": "ui-group",
-        "name": "Field A",
+        "name": "Field Main",
         "page": "7921d2b595bab1f4",
         "width": 6,
         "height": 1,
@@ -242,7 +258,7 @@
     {
         "id": "bdbcc8d0b29be63b",
         "type": "ui-group",
-        "name": "Field A",
+        "name": "Field Main",
         "page": "12cedcbb5353b4d2",
         "width": "4",
         "height": "2",
@@ -256,25 +272,11 @@
     {
         "id": "f9ee868b29e0a550",
         "type": "ui-group",
-        "name": "Field B",
+        "name": "Field A",
         "page": "12cedcbb5353b4d2",
         "width": "4",
         "height": "2",
         "order": 2,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "5e77608af37557b2",
-        "type": "ui-group",
-        "name": "Field C",
-        "page": "12cedcbb5353b4d2",
-        "width": "4",
-        "height": "2",
-        "order": 1,
         "showTitle": true,
         "className": "",
         "visible": "true",
@@ -380,62 +382,6 @@
         "groupType": "default"
     },
     {
-        "id": "026636a17e5e653c",
-        "type": "ui-group",
-        "name": "Settings",
-        "page": "6c5452f063a44bcc",
-        "width": 6,
-        "height": 1,
-        "order": 1,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "361ffd13049caeaf",
-        "type": "ui-group",
-        "name": "Humidity",
-        "page": "a3afd07bf4eb6f5d",
-        "width": 6,
-        "height": 1,
-        "order": 1,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "8289f4ffc6938e3c",
-        "type": "ui-group",
-        "name": "Windspeed",
-        "page": "a3afd07bf4eb6f5d",
-        "width": 6,
-        "height": 1,
-        "order": 2,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
-        "id": "b3c089c33c9c33d4",
-        "type": "ui-group",
-        "name": "Temperature",
-        "page": "a3afd07bf4eb6f5d",
-        "width": 6,
-        "height": 1,
-        "order": 3,
-        "showTitle": true,
-        "className": "",
-        "visible": "true",
-        "disabled": "false",
-        "groupType": "default"
-    },
-    {
         "id": "c3e372cf97bac1be",
         "type": "ui-group",
         "name": "Map",
@@ -522,23 +468,211 @@
         "disabled": "false"
     },
     {
+        "id": "026636a17e5e653c",
+        "type": "ui-group",
+        "name": "Settings",
+        "page": "6c5452f063a44bcc",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "361ffd13049caeaf",
+        "type": "ui-group",
+        "name": "Humidity",
+        "page": "a3afd07bf4eb6f5d",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "8289f4ffc6938e3c",
+        "type": "ui-group",
+        "name": "Windspeed",
+        "page": "a3afd07bf4eb6f5d",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "b3c089c33c9c33d4",
+        "type": "ui-group",
+        "name": "Temperature",
+        "page": "a3afd07bf4eb6f5d",
+        "width": 6,
+        "height": 1,
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "1629a6c661ceb35e",
+        "type": "ui-page",
+        "name": "Node Binding",
+        "ui": "bde818e8fe258a58",
+        "path": "/node_binding",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "247c990607f98efc",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 6,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "d99f53718476b1e1",
+        "type": "ui-group",
+        "name": "Pending Devices",
+        "page": "1629a6c661ceb35e",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "37a0f406cbaa8300",
+        "type": "ui-page",
+        "name": "Analytics",
+        "ui": "bde818e8fe258a58",
+        "path": "/analytics",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "247c990607f98efc",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 7,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "04fb1d5393761980",
+        "type": "ui-group",
+        "name": "Field Main history",
+        "page": "37a0f406cbaa8300",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "505ef1bf094f0b65",
+        "type": "mqtt-broker",
+        "name": "Test",
+        "broker": "https://test.mosquitto.org/",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
         "id": "3fe63e5473304ef1",
         "type": "mqtt in",
         "z": "c3cb9131a8cf95a3",
         "name": "",
-        "topic": "field_a/temperature",
+        "topic": "field_main/temp",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
+        "broker": "505ef1bf094f0b65",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 770,
+        "x": 760,
         "y": 180,
         "wires": [
             [
-                "346f32c53eb2a981"
+                "346f32c53eb2a981",
+                "bef2f8bec7d66a59"
             ]
         ]
     },
@@ -547,19 +681,20 @@
         "type": "mqtt in",
         "z": "c3cb9131a8cf95a3",
         "name": "",
-        "topic": "field_a/moisture",
+        "topic": "field_main/moisture",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
+        "broker": "505ef1bf094f0b65",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 740,
-        "y": 240,
+        "x": 770,
+        "y": 300,
         "wires": [
             [
-                "4aca496c9ded66ef"
+                "4aca496c9ded66ef",
+                "b498c019d40b872f"
             ]
         ]
     },
@@ -568,19 +703,19 @@
         "type": "mqtt in",
         "z": "c3cb9131a8cf95a3",
         "name": "",
-        "topic": "field_a/rain",
+        "topic": "field_main/rain",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
+        "broker": "505ef1bf094f0b65",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 740,
-        "y": 320,
+        "x": 780,
+        "y": 460,
         "wires": [
             [
-                "6c10b33e8d67c07a"
+                "cd8818b145dbd3c4"
             ]
         ]
     },
@@ -589,19 +724,20 @@
         "type": "mqtt in",
         "z": "c3cb9131a8cf95a3",
         "name": "",
-        "topic": "field_a/light",
+        "topic": "field_main/light",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
+        "broker": "505ef1bf094f0b65",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 750,
+        "x": 780,
         "y": 380,
         "wires": [
             [
-                "cd8818b145dbd3c4"
+                "6c10b33e8d67c07a",
+                "435cbc156f8b67f9"
             ]
         ]
     },
@@ -610,19 +746,20 @@
         "type": "mqtt in",
         "z": "c3cb9131a8cf95a3",
         "name": "",
-        "topic": "field_a/valve",
+        "topic": "field_main/valve",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
+        "broker": "505ef1bf094f0b65",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 750,
-        "y": 440,
+        "x": 780,
+        "y": 540,
         "wires": [
             [
-                "0a7b64c4c1b3a35b"
+                "0a7b64c4c1b3a35b",
+                "029b95c4fa5cca36"
             ]
         ]
     },
@@ -646,8 +783,8 @@
         "className": "",
         "value": "payload",
         "valueType": "msg",
-        "x": 930,
-        "y": 380,
+        "x": 970,
+        "y": 460,
         "wires": []
     },
     {
@@ -670,8 +807,8 @@
         "className": "",
         "value": "payload",
         "valueType": "msg",
-        "x": 930,
-        "y": 440,
+        "x": 950,
+        "y": 540,
         "wires": []
     },
     {
@@ -687,7 +824,7 @@
         "height": 3,
         "gtype": "gauge-half",
         "gstyle": "needle",
-        "title": "gauge",
+        "title": "Temp Field A",
         "alwaysShowTitle": false,
         "floatingTitlePosition": "top-left",
         "units": "units",
@@ -776,8 +913,8 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 950,
-        "y": 240,
+        "x": 970,
+        "y": 300,
         "wires": [
             []
         ]
@@ -830,456 +967,62 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 920,
-        "y": 320,
+        "x": 980,
+        "y": 380,
         "wires": [
             []
         ]
     },
     {
-        "id": "5858dc40e50f2e92",
-        "type": "inject",
+        "id": "bef2f8bec7d66a59",
+        "type": "link out",
         "z": "c3cb9131a8cf95a3",
-        "name": "INject",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
+        "name": "field_main_temp_stream",
+        "mode": "link",
+        "links": [
+            "ec2afe2adde1ad21"
         ],
-        "repeat": "3",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 100,
-        "y": 180,
-        "wires": [
-            [
-                "c65176a050443fc9",
-                "bb63735ad982a205",
-                "547901f58eab8610",
-                "5afcc619511ea737",
-                "99e3962c7d9fb86d"
-            ]
-        ]
+        "x": 885,
+        "y": 120,
+        "wires": []
     },
     {
-        "id": "c65176a050443fc9",
-        "type": "function",
+        "id": "b498c019d40b872f",
+        "type": "link out",
         "z": "c3cb9131a8cf95a3",
-        "name": "function 2",
-        "func": "msg.payload = (20 + Math.random() * 10).toFixed(1);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 180,
-        "wires": [
-            [
-                "58ea6ab57c0caaf9"
-            ]
-        ]
-    },
-    {
-        "id": "bb63735ad982a205",
-        "type": "function",
-        "z": "c3cb9131a8cf95a3",
-        "name": "Moisture",
-        "func": "msg.payload = Math.floor(Math.random() * 100);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 260,
-        "y": 240,
-        "wires": [
-            [
-                "ff3f5eb5165d9d0c"
-            ]
-        ]
-    },
-    {
-        "id": "547901f58eab8610",
-        "type": "function",
-        "z": "c3cb9131a8cf95a3",
-        "name": "Rain",
-        "func": "msg.payload = Math.random() > 0.8 ? \"wet\" : \"dry\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 250,
-        "y": 320,
-        "wires": [
-            [
-                "4f26eec7b2fae353"
-            ]
-        ]
-    },
-    {
-        "id": "5afcc619511ea737",
-        "type": "function",
-        "z": "c3cb9131a8cf95a3",
-        "name": "Light",
-        "func": "msg.payload = Math.floor(Math.random() * 1000);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 270,
-        "y": 380,
-        "wires": [
-            [
-                "5023582c9265984a"
-            ]
-        ]
-    },
-    {
-        "id": "99e3962c7d9fb86d",
-        "type": "function",
-        "z": "c3cb9131a8cf95a3",
-        "name": "VAlve",
-        "func": "const value = parseFloat(msg.payload);\nmsg.payload = value > 0.5 ? \"OPEN\" : \"CLOSED\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 270,
-        "y": 440,
-        "wires": [
-            [
-                "552edd9ea78462c4"
-            ]
-        ]
-    },
-    {
-        "id": "ff3f5eb5165d9d0c",
-        "type": "mqtt out",
-        "z": "c3cb9131a8cf95a3",
-        "name": "",
-        "topic": "field_a/moisture",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 480,
+        "name": "field_main_moisture_stream",
+        "mode": "link",
+        "links": [
+            "74b150ef6ddae691"
+        ],
+        "x": 885,
         "y": 240,
         "wires": []
     },
     {
-        "id": "4f26eec7b2fae353",
-        "type": "mqtt out",
+        "id": "435cbc156f8b67f9",
+        "type": "link out",
         "z": "c3cb9131a8cf95a3",
-        "name": "",
-        "topic": "field_a/rain",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 450,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "5023582c9265984a",
-        "type": "mqtt out",
-        "z": "c3cb9131a8cf95a3",
-        "name": "",
-        "topic": "field_a/light",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 450,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "552edd9ea78462c4",
-        "type": "mqtt out",
-        "z": "c3cb9131a8cf95a3",
-        "name": "",
-        "topic": "field_a/valve",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 450,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "58ea6ab57c0caaf9",
-        "type": "mqtt out",
-        "z": "c3cb9131a8cf95a3",
-        "name": "",
-        "topic": "field_a/temperature",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 470,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "47b48c518714a4b6",
-        "type": "inject",
-        "z": "697288345ed13a06",
-        "name": "INject",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
+        "name": "field_main_light_stream",
+        "mode": "link",
+        "links": [
+            "6e7d806b8c39c07f"
         ],
-        "repeat": "3",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 160,
-        "y": 140,
-        "wires": [
-            [
-                "d04d6e699784d25c",
-                "67e0ed20877991d5",
-                "be386ed4570e3647",
-                "17f6a80218619646",
-                "e9fa420f37aaed3d"
-            ]
-        ]
-    },
-    {
-        "id": "d04d6e699784d25c",
-        "type": "function",
-        "z": "697288345ed13a06",
-        "name": "function 3",
-        "func": "msg.payload = (20 + Math.random() * 10).toFixed(1);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 320,
-        "y": 140,
-        "wires": [
-            [
-                "c173deeefe0f3fb7"
-            ]
-        ]
-    },
-    {
-        "id": "67e0ed20877991d5",
-        "type": "function",
-        "z": "697288345ed13a06",
-        "name": "Moisture",
-        "func": "msg.payload = Math.floor(Math.random() * 100);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 320,
-        "y": 200,
-        "wires": [
-            [
-                "850b880e87805227"
-            ]
-        ]
-    },
-    {
-        "id": "be386ed4570e3647",
-        "type": "function",
-        "z": "697288345ed13a06",
-        "name": "Rain",
-        "func": "msg.payload = Math.random() > 0.8 ? \"wet\" : \"dry\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
-        "y": 280,
-        "wires": [
-            [
-                "c77176c4e869e74c"
-            ]
-        ]
-    },
-    {
-        "id": "17f6a80218619646",
-        "type": "function",
-        "z": "697288345ed13a06",
-        "name": "Light",
-        "func": "msg.payload = Math.floor(Math.random() * 1000);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 330,
-        "y": 340,
-        "wires": [
-            [
-                "0cd2be469ad383d2"
-            ]
-        ]
-    },
-    {
-        "id": "e9fa420f37aaed3d",
-        "type": "function",
-        "z": "697288345ed13a06",
-        "name": "VAlve",
-        "func": "msg.payload = Math.random() > 0.5 ? \"OPEN\" : \"CLOSED\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 330,
-        "y": 400,
-        "wires": [
-            [
-                "384aa17f58eb5643"
-            ]
-        ]
-    },
-    {
-        "id": "c173deeefe0f3fb7",
-        "type": "mqtt out",
-        "z": "697288345ed13a06",
-        "name": "",
-        "topic": "field_b/temperature",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 530,
-        "y": 140,
+        "x": 895,
+        "y": 360,
         "wires": []
     },
     {
-        "id": "850b880e87805227",
-        "type": "mqtt out",
-        "z": "697288345ed13a06",
-        "name": "",
-        "topic": "field_b/moisture",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 520,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "c77176c4e869e74c",
-        "type": "mqtt out",
-        "z": "697288345ed13a06",
-        "name": "",
-        "topic": "field_b/rain",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 510,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "0cd2be469ad383d2",
-        "type": "mqtt out",
-        "z": "697288345ed13a06",
-        "name": "",
-        "topic": "field_b/light",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 510,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "384aa17f58eb5643",
-        "type": "mqtt out",
-        "z": "697288345ed13a06",
-        "name": "",
-        "topic": "field_b/valve",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 510,
-        "y": 400,
+        "id": "029b95c4fa5cca36",
+        "type": "link out",
+        "z": "c3cb9131a8cf95a3",
+        "name": "field_main_valve_stream",
+        "mode": "link",
+        "links": [
+            "3550f7625338f3d4"
+        ],
+        "x": 885,
+        "y": 480,
         "wires": []
     },
     {
@@ -1287,103 +1030,19 @@
         "type": "mqtt in",
         "z": "697288345ed13a06",
         "name": "",
-        "topic": "field_b/temperature",
+        "topic": "field_a/lora_data",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
+        "broker": "505ef1bf094f0b65",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 830,
+        "x": 260,
         "y": 140,
         "wires": [
             [
-                "3a88417352a44477"
-            ]
-        ]
-    },
-    {
-        "id": "da538dfd4d6f551b",
-        "type": "mqtt in",
-        "z": "697288345ed13a06",
-        "name": "",
-        "topic": "field_b/moisture",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 800,
-        "y": 200,
-        "wires": [
-            [
-                "959027b21b87dec6"
-            ]
-        ]
-    },
-    {
-        "id": "92500ba7d568fa2d",
-        "type": "mqtt in",
-        "z": "697288345ed13a06",
-        "name": "",
-        "topic": "field_b/rain",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 800,
-        "y": 280,
-        "wires": [
-            [
-                "9f774c3e758eb4d1"
-            ]
-        ]
-    },
-    {
-        "id": "40c00295d675e10e",
-        "type": "mqtt in",
-        "z": "697288345ed13a06",
-        "name": "",
-        "topic": "field_b/light",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 810,
-        "y": 340,
-        "wires": [
-            [
-                "1900afa099157b5c"
-            ]
-        ]
-    },
-    {
-        "id": "268821f97cbf8e6d",
-        "type": "mqtt in",
-        "z": "697288345ed13a06",
-        "name": "",
-        "topic": "field_b/valve",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 810,
-        "y": 400,
-        "wires": [
-            [
-                "13ce014496a1ee84"
+                "0da6957652028c17"
             ]
         ]
     },
@@ -1392,7 +1051,7 @@
         "type": "ui-text",
         "z": "697288345ed13a06",
         "group": "f9ee868b29e0a550",
-        "order": 2,
+        "order": 10,
         "width": 0,
         "height": 0,
         "name": "Rain",
@@ -1407,7 +1066,7 @@
         "className": "",
         "value": "payload",
         "valueType": "msg",
-        "x": 990,
+        "x": 830,
         "y": 340,
         "wires": []
     },
@@ -1431,7 +1090,7 @@
         "className": "",
         "value": "payload",
         "valueType": "msg",
-        "x": 990,
+        "x": 830,
         "y": 400,
         "wires": []
     },
@@ -1441,7 +1100,7 @@
         "z": "697288345ed13a06",
         "name": "Temperature (°C)",
         "group": "f9ee868b29e0a550",
-        "order": 5,
+        "order": 7,
         "value": "payload",
         "valueType": "msg",
         "width": 3,
@@ -1483,7 +1142,7 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 1050,
+        "x": 890,
         "y": 140,
         "wires": [
             []
@@ -1495,7 +1154,7 @@
         "z": "697288345ed13a06",
         "name": "Soil moisture (%)",
         "group": "f9ee868b29e0a550",
-        "order": 4,
+        "order": 8,
         "value": "payload",
         "valueType": "msg",
         "width": 3,
@@ -1537,7 +1196,7 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 1010,
+        "x": 850,
         "y": 200,
         "wires": [
             []
@@ -1549,7 +1208,7 @@
         "z": "697288345ed13a06",
         "name": "Light level",
         "group": "f9ee868b29e0a550",
-        "order": 3,
+        "order": 9,
         "value": "payload",
         "valueType": "msg",
         "width": 3,
@@ -1591,346 +1250,63 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 980,
+        "x": 820,
         "y": 280,
         "wires": [
             []
         ]
     },
     {
-        "id": "85071deb351dcffa",
-        "type": "inject",
-        "z": "c2fa9e34c92f937d",
-        "name": "INject",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "3",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 120,
-        "y": 120,
-        "wires": [
-            [
-                "5ccd38a437d16cc4",
-                "b040aea90b71b426",
-                "b749d7746260f404",
-                "a99e8634bcb9dd1e",
-                "fe572601faf673f7"
-            ]
-        ]
-    },
-    {
-        "id": "5ccd38a437d16cc4",
+        "id": "0da6957652028c17",
         "type": "function",
-        "z": "c2fa9e34c92f937d",
-        "name": "function 1",
-        "func": "msg.payload = (20 + Math.random() * 10).toFixed(1);\nreturn msg;",
-        "outputs": 1,
+        "z": "697288345ed13a06",
+        "name": "Parse Lora data",
+        "func": "const raw = msg.payload.toString();\nconst parsed = {};\n\nraw.split(\",\").forEach(pair => {\n    const [key, value] = pair.split(\":\");\n    if (key && value !== undefined) {\n        parsed[key.trim()] = parseFloat(value);\n    }\n});\n\n// Build separate messages — one per sensor — each as plain numeric payload,\n// matching the format Field A's existing flows expect\nreturn [\n    { payload: parsed.H, topic: \"field_a/humidity\" },\n    { payload: parsed.T, topic: \"field_a/temperature\" },\n    { payload: parsed.S, topic: \"field_a/moisture\" }\n];",
+        "outputs": 3,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
-        "y": 120,
+        "x": 500,
+        "y": 140,
         "wires": [
+            [],
             [
-                "169f2791ee0c3e92"
+                "3a88417352a44477"
+            ],
+            [
+                "959027b21b87dec6"
             ]
         ]
     },
     {
-        "id": "b040aea90b71b426",
-        "type": "function",
+        "id": "75d1e755940e2ba9",
+        "type": "mqtt in",
         "z": "c2fa9e34c92f937d",
-        "name": "Moisture",
-        "func": "msg.payload = Math.floor(Math.random() * 100);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 280,
+        "name": "",
+        "topic": "field_a/lora_data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "505ef1bf094f0b65",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
         "y": 180,
         "wires": [
             [
-                "1b7294e854473091"
+                "f38fbd863d04fa1b"
             ]
         ]
     },
     {
-        "id": "b749d7746260f404",
-        "type": "function",
-        "z": "c2fa9e34c92f937d",
-        "name": "Rain",
-        "func": "msg.payload = Math.random() > 0.8 ? \"wet\" : \"dry\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 270,
-        "y": 260,
-        "wires": [
-            [
-                "812c9d2230dcc9c2"
-            ]
-        ]
-    },
-    {
-        "id": "a99e8634bcb9dd1e",
-        "type": "function",
-        "z": "c2fa9e34c92f937d",
-        "name": "Light",
-        "func": "msg.payload = Math.floor(Math.random() * 1000);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 290,
-        "y": 320,
-        "wires": [
-            [
-                "0e9927692df7209e"
-            ]
-        ]
-    },
-    {
-        "id": "fe572601faf673f7",
-        "type": "function",
-        "z": "c2fa9e34c92f937d",
-        "name": "VAlve",
-        "func": "msg.payload = Math.random() > 0.5 ? \"OPEN\" : \"CLOSED\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 290,
-        "y": 380,
-        "wires": [
-            [
-                "72ead6605ee1f395"
-            ]
-        ]
-    },
-    {
-        "id": "169f2791ee0c3e92",
-        "type": "mqtt out",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_c/temperature",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 490,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "1b7294e854473091",
-        "type": "mqtt out",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_c/moisture",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 480,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "812c9d2230dcc9c2",
-        "type": "mqtt out",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_c/rain",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 470,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "0e9927692df7209e",
-        "type": "mqtt out",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_c/light",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 470,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "72ead6605ee1f395",
-        "type": "mqtt out",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_c/valve",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f7fe60360238b079",
-        "x": 470,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "cb2c39ec52836fd5",
-        "type": "mqtt in",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_c/temperature",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 790,
-        "y": 120,
-        "wires": [
-            [
-                "5a275c9d7ab57426"
-            ]
-        ]
-    },
-    {
-        "id": "a55691d377c0943d",
-        "type": "mqtt in",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_c/moisture",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 760,
-        "y": 180,
-        "wires": [
-            [
-                "cf2dc37c2e86be30"
-            ]
-        ]
-    },
-    {
-        "id": "2b1d24cfdbb95cbc",
-        "type": "mqtt in",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_c/rain",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 760,
-        "y": 260,
-        "wires": [
-            [
-                "6fa117367cd999bf"
-            ]
-        ]
-    },
-    {
-        "id": "d51cc498e2f4a0e5",
-        "type": "mqtt in",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_c/light",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 760,
-        "y": 320,
-        "wires": [
-            [
-                "eac48da3209ade69"
-            ]
-        ]
-    },
-    {
-        "id": "c3f26d2aff4fe2c7",
-        "type": "mqtt in",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_c/valve",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f7fe60360238b079",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 770,
-        "y": 380,
-        "wires": [
-            [
-                "9f1ced525bbbc423"
-            ]
-        ]
-    },
-    {
-        "id": "eac48da3209ade69",
+        "id": "3fc1a79e24e57988",
         "type": "ui-text",
         "z": "c2fa9e34c92f937d",
-        "group": "5e77608af37557b2",
-        "order": 2,
+        "group": "f9ee868b29e0a550",
+        "order": 3,
         "width": 0,
         "height": 0,
         "name": "Rain",
@@ -1945,16 +1321,16 @@
         "className": "",
         "value": "payload",
         "valueType": "msg",
-        "x": 950,
-        "y": 320,
+        "x": 770,
+        "y": 380,
         "wires": []
     },
     {
-        "id": "9f1ced525bbbc423",
+        "id": "250f53c13c65d1d1",
         "type": "ui-text",
         "z": "c2fa9e34c92f937d",
-        "group": "5e77608af37557b2",
-        "order": 1,
+        "group": "f9ee868b29e0a550",
+        "order": 2,
         "width": 0,
         "height": 0,
         "name": "Valve",
@@ -1969,17 +1345,17 @@
         "className": "",
         "value": "payload",
         "valueType": "msg",
-        "x": 950,
-        "y": 380,
+        "x": 770,
+        "y": 440,
         "wires": []
     },
     {
-        "id": "5a275c9d7ab57426",
+        "id": "580141735ab55711",
         "type": "ui-gauge",
         "z": "c2fa9e34c92f937d",
         "name": "Temperature (°C)",
-        "group": "5e77608af37557b2",
-        "order": 5,
+        "group": "f9ee868b29e0a550",
+        "order": 6,
         "value": "payload",
         "valueType": "msg",
         "width": 3,
@@ -2021,19 +1397,19 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 1010,
-        "y": 120,
+        "x": 830,
+        "y": 180,
         "wires": [
             []
         ]
     },
     {
-        "id": "cf2dc37c2e86be30",
+        "id": "73c55b5d31aa1176",
         "type": "ui-gauge",
         "z": "c2fa9e34c92f937d",
         "name": "Soil moisture (%)",
-        "group": "5e77608af37557b2",
-        "order": 4,
+        "group": "f9ee868b29e0a550",
+        "order": 5,
         "value": "payload",
         "valueType": "msg",
         "width": 3,
@@ -2075,19 +1451,19 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 970,
-        "y": 180,
+        "x": 790,
+        "y": 240,
         "wires": [
             []
         ]
     },
     {
-        "id": "6fa117367cd999bf",
+        "id": "1d3dbb68613761ac",
         "type": "ui-gauge",
         "z": "c2fa9e34c92f937d",
         "name": "Light level",
-        "group": "5e77608af37557b2",
-        "order": 3,
+        "group": "f9ee868b29e0a550",
+        "order": 4,
         "value": "payload",
         "valueType": "msg",
         "width": 3,
@@ -2129,10 +1505,34 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 940,
-        "y": 260,
+        "x": 760,
+        "y": 320,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "f38fbd863d04fa1b",
+        "type": "function",
+        "z": "c2fa9e34c92f937d",
+        "name": "Parse Lora data",
+        "func": "const raw = msg.payload.toString();\nconst parsed = {};\n\nraw.split(\",\").forEach(pair => {\n    const [key, value] = pair.split(\":\");\n    if (key && value !== undefined) {\n        parsed[key.trim()] = parseFloat(value);\n    }\n});\n\n// Build separate messages — one per sensor — each as plain numeric payload,\n// matching the format Field A's existing flows expect\nreturn [\n    { payload: parsed.H, topic: \"field_a/humidity\" },\n    { payload: parsed.T, topic: \"field_a/temperature\" },\n    { payload: parsed.S, topic: \"field_a/moisture\" }\n];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "580141735ab55711"
+            ],
+            [
+                "73c55b5d31aa1176"
+            ]
         ]
     },
     {
@@ -3606,7 +3006,7 @@
         "type": "mqtt out",
         "z": "83859db467e828f0",
         "name": "",
-        "topic": "field_a/command/valve",
+        "topic": "field_main/command/valve",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -3615,7 +3015,7 @@
         "correl": "",
         "expiry": "",
         "broker": "f7fe60360238b079",
-        "x": 320,
+        "x": 340,
         "y": 200,
         "wires": []
     },
@@ -3650,7 +3050,8 @@
         "y": 300,
         "wires": [
             [
-                "79aa92a8bdc2e382"
+                "79aa92a8bdc2e382",
+                "bf636c111dc3faf0"
             ]
         ]
     },
@@ -3659,7 +3060,7 @@
         "type": "mqtt out",
         "z": "83859db467e828f0",
         "name": "",
-        "topic": "field_a/threshold/moisture",
+        "topic": "field_main/threshold/moisture",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -3668,7 +3069,7 @@
         "correl": "",
         "expiry": "",
         "broker": "f7fe60360238b079",
-        "x": 570,
+        "x": 580,
         "y": 300,
         "wires": []
     },
@@ -3741,7 +3142,7 @@
         "type": "mqtt out",
         "z": "83859db467e828f0",
         "name": "",
-        "topic": "field_a/threshold/light",
+        "topic": "field_main/threshold/light",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -3750,7 +3151,7 @@
         "correl": "",
         "expiry": "",
         "broker": "f7fe60360238b079",
-        "x": 580,
+        "x": 590,
         "y": 380,
         "wires": []
     },
@@ -3823,7 +3224,7 @@
         "type": "mqtt out",
         "z": "83859db467e828f0",
         "name": "",
-        "topic": "field_a/threshold/humidity",
+        "topic": "field_main/threshold/humidity",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -3832,7 +3233,7 @@
         "correl": "",
         "expiry": "",
         "broker": "f7fe60360238b079",
-        "x": 590,
+        "x": 600,
         "y": 460,
         "wires": []
     },
@@ -3905,7 +3306,7 @@
         "type": "mqtt out",
         "z": "83859db467e828f0",
         "name": "",
-        "topic": "field_a/threshold/rain",
+        "topic": "field_main/threshold/rain",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -3914,7 +3315,7 @@
         "correl": "",
         "expiry": "",
         "broker": "f7fe60360238b079",
-        "x": 620,
+        "x": 630,
         "y": 580,
         "wires": []
     },
@@ -3987,7 +3388,7 @@
         "type": "mqtt out",
         "z": "83859db467e828f0",
         "name": "",
-        "topic": "field_a/threshold/temperature",
+        "topic": "field_main/threshold/temperature",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -3996,7 +3397,7 @@
         "correl": "",
         "expiry": "",
         "broker": "f7fe60360238b079",
-        "x": 660,
+        "x": 680,
         "y": 660,
         "wires": []
     },
@@ -4027,6 +3428,837 @@
             [
                 "4d32f2d0ef65b663"
             ]
+        ]
+    },
+    {
+        "id": "bf636c111dc3faf0",
+        "type": "link out",
+        "z": "83859db467e828f0",
+        "name": "field_a_moisture_threshold_stream",
+        "mode": "link",
+        "links": [
+            "9fba5b924d79f30f"
+        ],
+        "x": 445,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "eee09decb45a0250",
+        "type": "mqtt in",
+        "z": "8b8f80d3498d1150",
+        "name": "",
+        "topic": "gateway/nodes/new",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f7fe60360238b079",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "e3b484fffdf083bd"
+            ]
+        ]
+    },
+    {
+        "id": "e3b484fffdf083bd",
+        "type": "function",
+        "z": "8b8f80d3498d1150",
+        "name": "setup node",
+        "func": "// Get the existing list of pending devices, or start fresh\nlet pending = flow.get(\"pending_devices\") || [];\n\nconst newUid = msg.payload.uid;\n\n// Don't add the same UID twice if it announces itself again\nconst alreadyPending = pending.some(d => d.uid === newUid);\nif (!alreadyPending) {\n    pending.push({\n        uid: newUid,\n        status: \"UNREGISTERED\",\n        firstSeen: new Date().toLocaleTimeString()\n    });\n    flow.set(\"pending_devices\", pending);\n}\n\n// Emit the full current list so downstream nodes can render it\nmsg.payload = pending;\nreturn msg;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 140,
+        "wires": [
+            [
+                "37fbc93046a26c33",
+                "3af509ec505e6f38"
+            ]
+        ]
+    },
+    {
+        "id": "37fbc93046a26c33",
+        "type": "ui-template",
+        "z": "8b8f80d3498d1150",
+        "group": "d99f53718476b1e1",
+        "page": "",
+        "ui": "",
+        "name": "",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "head": "",
+        "format": "<template>\n  <div>\n    <h3 v-if=\"!msg || !msg.payload || msg.payload.length === 0\">\n      No pending devices\n    </h3>\n    <table v-else style=\"width: 100%; border-collapse: collapse;\">\n      <thead>\n        <tr style=\"text-align: left; border-bottom: 1px solid #ccc;\">\n          <th>UID</th>\n          <th>Status</th>\n          <th>First seen</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr v-for=\"device in msg.payload\" :key=\"device.uid\">\n          <td>{{ device.uid }}</td>\n          <td style=\"color: orange;\">{{ device.status }}</td>\n          <td>{{ device.firstSeen }}</td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</template>",
+        "storeOutMessages": true,
+        "passthru": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 720,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9e40d992e5465a65",
+        "type": "ui-dropdown",
+        "z": "8b8f80d3498d1150",
+        "group": "d99f53718476b1e1",
+        "name": "Pick_UID",
+        "label": "Select Option:",
+        "tooltip": "",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "chips": false,
+        "clearable": false,
+        "options": [],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "typeIsComboBox": true,
+        "msgTrigger": "onChange",
+        "x": 620,
+        "y": 400,
+        "wires": [
+            [
+                "d67cec15c24a2854"
+            ]
+        ]
+    },
+    {
+        "id": "d697f2e9eae2c88c",
+        "type": "ui-button",
+        "z": "8b8f80d3498d1150",
+        "group": "d99f53718476b1e1",
+        "name": "Assign",
+        "label": "Assign",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 110,
+        "y": 240,
+        "wires": [
+            [
+                "baee1ee3496aa426"
+            ]
+        ]
+    },
+    {
+        "id": "3af509ec505e6f38",
+        "type": "function",
+        "z": "8b8f80d3498d1150",
+        "name": "Build dropdown options",
+        "func": "const pending = flow.get(\"pending_devices\") || [];\nmsg.ui_update = {\n    options: pending.map(d => ({ label: d.uid, value: d.uid }))\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 400,
+        "wires": [
+            [
+                "9e40d992e5465a65"
+            ]
+        ]
+    },
+    {
+        "id": "d67cec15c24a2854",
+        "type": "function",
+        "z": "8b8f80d3498d1150",
+        "name": "Save selected UID",
+        "func": "flow.set(\"selected_uid\", msg.payload);\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bbd7fd0242f9407e",
+        "type": "function",
+        "z": "8b8f80d3498d1150",
+        "name": "Save selected slot",
+        "func": "flow.set(\"selected_slot\", msg.payload);\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1070,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "baee1ee3496aa426",
+        "type": "function",
+        "z": "8b8f80d3498d1150",
+        "name": "Bind Device",
+        "func": "const uid = flow.get(\"selected_uid\");\nconst slot = flow.get(\"selected_slot\");\n\nif (!uid || !slot) {\n    node.warn(\"Pick a UID and a slot first\");\n    return null;\n}\n\nconst bindCommand = { uid: uid, slot: slot };\n\n// Remove the bound device from pending\nlet pending = flow.get(\"pending_devices\") || [];\npending = pending.filter(d => d.uid !== uid);\nflow.set(\"pending_devices\", pending);\n\n// Remove the consumed slot from free_slots\nlet freeSlots = flow.get(\"free_slots\") || [];\nfreeSlots = freeSlots.filter(s => s !== slot);\nflow.set(\"free_slots\", freeSlots);\n\n// Clear stashed selections so the UI doesn't carry stale picks\nflow.set(\"selected_uid\", null);\nflow.set(\"selected_slot\", null);\n\nreturn [\n    { payload: bindCommand, topic: \"gateway/command/bind\" },\n    { payload: pending }\n];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "6780ddfb925315d2"
+            ],
+            [
+                "37fbc93046a26c33",
+                "3af509ec505e6f38",
+                "3a5c58e05fabbfa1"
+            ]
+        ]
+    },
+    {
+        "id": "6780ddfb925315d2",
+        "type": "mqtt out",
+        "z": "8b8f80d3498d1150",
+        "name": "",
+        "topic": "gateway/command/bind",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f7fe60360238b079",
+        "x": 610,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7106b7318eb66c0e",
+        "type": "ui-dropdown",
+        "z": "8b8f80d3498d1150",
+        "group": "d99f53718476b1e1",
+        "name": "Assign_to_slot",
+        "label": "Select Binding Slot:",
+        "tooltip": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "chips": false,
+        "clearable": false,
+        "options": [],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "typeIsComboBox": true,
+        "msgTrigger": "onChange",
+        "x": 820,
+        "y": 480,
+        "wires": [
+            [
+                "bbd7fd0242f9407e"
+            ]
+        ]
+    },
+    {
+        "id": "20c25277ab353826",
+        "type": "inject",
+        "z": "8b8f80d3498d1150",
+        "name": "Inject free slots",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 480,
+        "wires": [
+            [
+                "6eb59dd8ee7683f4"
+            ]
+        ]
+    },
+    {
+        "id": "6eb59dd8ee7683f4",
+        "type": "function",
+        "z": "8b8f80d3498d1150",
+        "name": "init free slots",
+        "func": "if (!flow.get(\"free_slots\")) {\n    flow.set(\"free_slots\", [\"field_a\", \"field_b\"]);\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 480,
+        "wires": [
+            [
+                "3a5c58e05fabbfa1"
+            ]
+        ]
+    },
+    {
+        "id": "3a5c58e05fabbfa1",
+        "type": "function",
+        "z": "8b8f80d3498d1150",
+        "name": "Build slot options",
+        "func": "const slots = flow.get(\"free_slots\") || [];\nmsg.ui_update = {\n    options: slots.map(s => ({ label: s, value: s }))\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 480,
+        "wires": [
+            [
+                "7106b7318eb66c0e"
+            ]
+        ]
+    },
+    {
+        "id": "669c21be37323233",
+        "type": "ui-chart",
+        "z": "9e7d7c12d1458246",
+        "group": "04fb1d5393761980",
+        "name": "Temperature (°C)",
+        "label": "chart",
+        "order": 3,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "0",
+        "ymax": "50",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "2",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 390,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ec2afe2adde1ad21",
+        "type": "link in",
+        "z": "9e7d7c12d1458246",
+        "name": "field_main_temp_out",
+        "links": [
+            "bef2f8bec7d66a59"
+        ],
+        "x": 195,
+        "y": 220,
+        "wires": [
+            [
+                "669c21be37323233"
+            ]
+        ]
+    },
+    {
+        "id": "245125f9f83c1e76",
+        "type": "ui-chart",
+        "z": "9e7d7c12d1458246",
+        "group": "04fb1d5393761980",
+        "name": "Soil Moisture Level (%)",
+        "label": "chart",
+        "order": 5,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "0",
+        "ymax": "100",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "2",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 370,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "74b150ef6ddae691",
+        "type": "link in",
+        "z": "9e7d7c12d1458246",
+        "name": "field_main_moisture_out",
+        "links": [
+            "b498c019d40b872f"
+        ],
+        "x": 195,
+        "y": 300,
+        "wires": [
+            [
+                "245125f9f83c1e76",
+                "96ea28c8c326ecf0"
+            ]
+        ]
+    },
+    {
+        "id": "7cda6b83b0dc9072",
+        "type": "ui-chart",
+        "z": "9e7d7c12d1458246",
+        "group": "04fb1d5393761980",
+        "name": "Light level",
+        "label": "chart",
+        "order": 4,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "0",
+        "ymax": "1000",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "2",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 420,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6e7d806b8c39c07f",
+        "type": "link in",
+        "z": "9e7d7c12d1458246",
+        "name": "field_main_light_out",
+        "links": [
+            "435cbc156f8b67f9"
+        ],
+        "x": 195,
+        "y": 380,
+        "wires": [
+            [
+                "7cda6b83b0dc9072"
+            ]
+        ]
+    },
+    {
+        "id": "3550f7625338f3d4",
+        "type": "link in",
+        "z": "9e7d7c12d1458246",
+        "name": "field_main_valve_out",
+        "links": [
+            "029b95c4fa5cca36"
+        ],
+        "x": 195,
+        "y": 460,
+        "wires": [
+            [
+                "427bf87890f1adb0",
+                "2f29e3d5755990d7"
+            ]
+        ]
+    },
+    {
+        "id": "427bf87890f1adb0",
+        "type": "function",
+        "z": "9e7d7c12d1458246",
+        "name": "field Main water Tracker",
+        "func": "const FLOW_RATE_ML_PER_SEC = 100;  // assumption: small irrigation valve\nconst state = msg.payload;\nconst now = Date.now();\n\n// Per-field tracking state stored in flow context\nlet tracker = flow.get(\"field_main_water\") || {\n    openedAt: null,    // timestamp when valve last went OPEN\n    totalMl: 0          // cumulative water used (ml)\n};\n\nif (state === \"ON\" && tracker.openedAt === null) {\n    // Valve just opened — mark the timestamp\n    tracker.openedAt = now;\n} else if (state === \"OFF\" && tracker.openedAt !== null) {\n    // Valve just closed — add the elapsed open time to total\n    const elapsedSec = (now - tracker.openedAt) / 1000;\n    tracker.totalMl += elapsedSec * FLOW_RATE_ML_PER_SEC;\n    tracker.openedAt = null;\n}\n\nflow.set(\"field_main_water\", tracker);\n\n// Emit current total in litres for downstream display\nmsg.payload = (tracker.totalMl / 1000).toFixed(2);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 460,
+        "wires": [
+            [
+                "c46320386a2fdcb7",
+                "290f466847993470"
+            ]
+        ]
+    },
+    {
+        "id": "c46320386a2fdcb7",
+        "type": "ui-text",
+        "z": "9e7d7c12d1458246",
+        "group": "04fb1d5393761980",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Total water used (L)",
+        "label": "Total water used (L)",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 610,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "290f466847993470",
+        "type": "ui-chart",
+        "z": "9e7d7c12d1458246",
+        "group": "04fb1d5393761980",
+        "name": "Cumulative water usage (L)",
+        "label": "Cumulative water usage (L)",
+        "order": 6,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "0",
+        "ymax": "10",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "2",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 640,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "96ea28c8c326ecf0",
+        "type": "function",
+        "z": "9e7d7c12d1458246",
+        "name": "Cache moisture",
+        "func": "flow.set(\"field_main_latest_moisture\", parseFloat(msg.payload));\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9fba5b924d79f30f",
+        "type": "link in",
+        "z": "9e7d7c12d1458246",
+        "name": "field_main_moisture_out",
+        "links": [
+            "bf636c111dc3faf0"
+        ],
+        "x": 205,
+        "y": 720,
+        "wires": [
+            [
+                "5b20a8534bd3d823"
+            ]
+        ]
+    },
+    {
+        "id": "5b20a8534bd3d823",
+        "type": "function",
+        "z": "9e7d7c12d1458246",
+        "name": "Cache threshold",
+        "func": "flow.set(\"field_main_threshold_moisture\", parseFloat(msg.payload));\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f29e3d5755990d7",
+        "type": "function",
+        "z": "9e7d7c12d1458246",
+        "name": "Field MAIN efficiency",
+        "func": "const state = msg.payload;\n\n// Only evaluate at the moment the valve opens\nif (state !== \"ON\") {\n    return null;\n}\n\nconst moisture = flow.get(\"field_main_latest_moisture\");\nconst threshold = flow.get(\"field_main_threshold_moisture\");\n\n// Need both to evaluate; bail if we haven't seen them yet\nif (moisture === undefined || threshold === undefined) {\n    return null;\n}\n\nlet stats = flow.get(\"field_main_efficiency\") || { needed: 0, wasted: 0 };\n\nif (moisture < threshold) {\n    stats.needed += 1;   // soil was dry — irrigation was justified\n} else {\n    stats.wasted += 1;   // soil was already wet — wasted water\n}\n\nflow.set(\"field_main_efficiency\", stats);\n\nconst total = stats.needed + stats.wasted;\nconst efficiency = total === 0 ? 0 : (stats.needed / total) * 100;\n\nmsg.payload = efficiency.toFixed(1);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 640,
+        "wires": [
+            [
+                "8065ceb7080f9a78"
+            ]
+        ]
+    },
+    {
+        "id": "8065ceb7080f9a78",
+        "type": "ui-gauge",
+        "z": "9e7d7c12d1458246",
+        "name": "Efficiency percentage",
+        "group": "04fb1d5393761980",
+        "order": 1,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Field A Irrigation efficiency (%)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "4",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 620,
+        "y": 640,
+        "wires": [
+            []
         ]
     }
 ]
