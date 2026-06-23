@@ -56,6 +56,14 @@
         "env": []
     },
     {
+        "id": "c847ebdb2241b7d6",
+        "type": "tab",
+        "label": "Alerts",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "f7fe60360238b079",
         "type": "mqtt-broker",
         "name": "local",
@@ -262,7 +270,7 @@
         "page": "12cedcbb5353b4d2",
         "width": "4",
         "height": "2",
-        "order": 3,
+        "order": 2,
         "showTitle": true,
         "className": "",
         "visible": "true",
@@ -276,7 +284,7 @@
         "page": "12cedcbb5353b4d2",
         "width": "4",
         "height": "2",
-        "order": 2,
+        "order": 1,
         "showTitle": true,
         "className": "",
         "visible": "true",
@@ -655,6 +663,70 @@
         "sessionExpiry": ""
     },
     {
+        "id": "439f46bdd2bb833d",
+        "type": "ui-page",
+        "name": "Alerts",
+        "ui": "bde818e8fe258a58",
+        "path": "/page8",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "247c990607f98efc",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 8,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "2138b2ca33187e6e",
+        "type": "ui-group",
+        "name": "Active Alerts",
+        "page": "439f46bdd2bb833d",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "302b2626c211e6e2",
+        "type": "ui-group",
+        "name": "Field B",
+        "page": "12cedcbb5353b4d2",
+        "width": 6,
+        "height": 1,
+        "order": -1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
         "id": "3fe63e5473304ef1",
         "type": "mqtt in",
         "z": "c3cb9131a8cf95a3",
@@ -667,8 +739,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 760,
-        "y": 180,
+        "x": 220,
+        "y": 120,
         "wires": [
             [
                 "346f32c53eb2a981",
@@ -689,8 +761,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 770,
-        "y": 300,
+        "x": 230,
+        "y": 420,
         "wires": [
             [
                 "4aca496c9ded66ef",
@@ -711,8 +783,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 780,
-        "y": 460,
+        "x": 240,
+        "y": 480,
         "wires": [
             [
                 "cd8818b145dbd3c4"
@@ -732,8 +804,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 780,
-        "y": 380,
+        "x": 220,
+        "y": 300,
         "wires": [
             [
                 "6c10b33e8d67c07a",
@@ -746,7 +818,7 @@
         "type": "mqtt in",
         "z": "c3cb9131a8cf95a3",
         "name": "",
-        "topic": "field_main/valve",
+        "topic": "field_main/valve_feedback",
         "qos": "2",
         "datatype": "auto-detect",
         "broker": "505ef1bf094f0b65",
@@ -754,8 +826,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 780,
-        "y": 540,
+        "x": 270,
+        "y": 560,
         "wires": [
             [
                 "0a7b64c4c1b3a35b",
@@ -783,8 +855,8 @@
         "className": "",
         "value": "payload",
         "valueType": "msg",
-        "x": 970,
-        "y": 460,
+        "x": 430,
+        "y": 480,
         "wires": []
     },
     {
@@ -807,8 +879,8 @@
         "className": "",
         "value": "payload",
         "valueType": "msg",
-        "x": 950,
-        "y": 540,
+        "x": 490,
+        "y": 560,
         "wires": []
     },
     {
@@ -817,7 +889,7 @@
         "z": "c3cb9131a8cf95a3",
         "name": "Temperature (°C)",
         "group": "bdbcc8d0b29be63b",
-        "order": 5,
+        "order": 6,
         "value": "payload",
         "valueType": "msg",
         "width": 3,
@@ -859,8 +931,8 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 990,
-        "y": 180,
+        "x": 450,
+        "y": 120,
         "wires": [
             []
         ]
@@ -913,8 +985,8 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 970,
-        "y": 300,
+        "x": 430,
+        "y": 420,
         "wires": [
             []
         ]
@@ -967,8 +1039,8 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 980,
-        "y": 380,
+        "x": 420,
+        "y": 300,
         "wires": [
             []
         ]
@@ -982,8 +1054,8 @@
         "links": [
             "ec2afe2adde1ad21"
         ],
-        "x": 885,
-        "y": 120,
+        "x": 345,
+        "y": 60,
         "wires": []
     },
     {
@@ -995,8 +1067,8 @@
         "links": [
             "74b150ef6ddae691"
         ],
-        "x": 885,
-        "y": 240,
+        "x": 345,
+        "y": 360,
         "wires": []
     },
     {
@@ -1008,8 +1080,8 @@
         "links": [
             "6e7d806b8c39c07f"
         ],
-        "x": 895,
-        "y": 360,
+        "x": 335,
+        "y": 280,
         "wires": []
     },
     {
@@ -1021,8 +1093,97 @@
         "links": [
             "3550f7625338f3d4"
         ],
-        "x": 885,
-        "y": 480,
+        "x": 345,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "d6533551ecdafbf0",
+        "type": "mqtt in",
+        "z": "c3cb9131a8cf95a3",
+        "name": "",
+        "topic": "field_main/humidity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "505ef1bf094f0b65",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "6c3dc1681582150c",
+                "6984d9f55747fa13"
+            ]
+        ]
+    },
+    {
+        "id": "6c3dc1681582150c",
+        "type": "ui-gauge",
+        "z": "c3cb9131a8cf95a3",
+        "name": "Humidity (%)",
+        "group": "bdbcc8d0b29be63b",
+        "order": 5,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "gauge",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "4",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 410,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6984d9f55747fa13",
+        "type": "link out",
+        "z": "c3cb9131a8cf95a3",
+        "name": "field_main_humidity_stream",
+        "mode": "link",
+        "links": [
+            "5fefb219b05854cd"
+        ],
+        "x": 345,
+        "y": 180,
         "wires": []
     },
     {
@@ -1042,7 +1203,8 @@
         "y": 140,
         "wires": [
             [
-                "0da6957652028c17"
+                "0da6957652028c17",
+                "1571a48e9e5c0775"
             ]
         ]
     },
@@ -1066,7 +1228,7 @@
         "className": "",
         "value": "payload",
         "valueType": "msg",
-        "x": 830,
+        "x": 810,
         "y": 340,
         "wires": []
     },
@@ -1090,8 +1252,8 @@
         "className": "",
         "value": "payload",
         "valueType": "msg",
-        "x": 830,
-        "y": 400,
+        "x": 810,
+        "y": 380,
         "wires": []
     },
     {
@@ -1142,8 +1304,8 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 890,
-        "y": 140,
+        "x": 850,
+        "y": 100,
         "wires": [
             []
         ]
@@ -1261,7 +1423,7 @@
         "type": "function",
         "z": "697288345ed13a06",
         "name": "Parse Lora data",
-        "func": "const raw = msg.payload.toString();\nconst parsed = {};\n\nraw.split(\",\").forEach(pair => {\n    const [key, value] = pair.split(\":\");\n    if (key && value !== undefined) {\n        parsed[key.trim()] = parseFloat(value);\n    }\n});\n\n// Build separate messages — one per sensor — each as plain numeric payload,\n// matching the format Field A's existing flows expect\nreturn [\n    { payload: parsed.H, topic: \"field_a/humidity\" },\n    { payload: parsed.T, topic: \"field_a/temperature\" },\n    { payload: parsed.S, topic: \"field_a/moisture\" }\n];",
+        "func": "// Incoming payload like: \"FIELD_A,TEMP=28.5,HUM=75.0,MOIST=60,COUNT=95\"\nconst raw = msg.payload.toString();\nconst parts = raw.split(\",\");\n\nconst fieldId = parts.shift();           // pull off \"FIELD_A\"\nconst fieldPrefix = fieldId.toLowerCase(); // \"field_a\"\n\nconst parsed = {};\nparts.forEach(pair => {\n    const [key, value] = pair.split(\"=\");\n    if (key && value !== undefined) {\n        parsed[key.trim()] = parseFloat(value);\n    }\n});\n\n// parsed now looks like: { TEMP: 28.5, HUM: 75.0, MOIST: 60, COUNT: 95 }\nreturn [\n    { payload: parsed.TEMP,  topic: `${fieldPrefix}/temperature` },\n    { payload: parsed.HUM,   topic: `${fieldPrefix}/humidity` },\n    { payload: parsed.MOIST, topic: `${fieldPrefix}/moisture` },\n    { payload: parsed.COUNT, topic: `${fieldPrefix}/count` }\n];",
         "outputs": 3,
         "timeout": 0,
         "noerr": 0,
@@ -1271,9 +1433,11 @@
         "x": 500,
         "y": 140,
         "wires": [
-            [],
             [
                 "3a88417352a44477"
+            ],
+            [
+                "31edbccad21ff0c6"
             ],
             [
                 "959027b21b87dec6"
@@ -1281,133 +1445,27 @@
         ]
     },
     {
-        "id": "75d1e755940e2ba9",
-        "type": "mqtt in",
-        "z": "c2fa9e34c92f937d",
-        "name": "",
-        "topic": "field_a/lora_data",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "505ef1bf094f0b65",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 200,
-        "y": 180,
-        "wires": [
-            [
-                "f38fbd863d04fa1b"
-            ]
-        ]
-    },
-    {
-        "id": "3fc1a79e24e57988",
-        "type": "ui-text",
-        "z": "c2fa9e34c92f937d",
-        "group": "f9ee868b29e0a550",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "name": "Rain",
-        "label": "Rain",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#717171",
-        "wrapText": false,
-        "className": "",
-        "value": "payload",
-        "valueType": "msg",
-        "x": 770,
-        "y": 380,
+        "id": "1571a48e9e5c0775",
+        "type": "debug",
+        "z": "697288345ed13a06",
+        "name": "debug field a",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 220,
         "wires": []
     },
     {
-        "id": "250f53c13c65d1d1",
-        "type": "ui-text",
-        "z": "c2fa9e34c92f937d",
-        "group": "f9ee868b29e0a550",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "name": "Valve",
-        "label": "Valve Status",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#717171",
-        "wrapText": false,
-        "className": "",
-        "value": "payload",
-        "valueType": "msg",
-        "x": 770,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "580141735ab55711",
+        "id": "31edbccad21ff0c6",
         "type": "ui-gauge",
-        "z": "c2fa9e34c92f937d",
-        "name": "Temperature (°C)",
-        "group": "f9ee868b29e0a550",
-        "order": 6,
-        "value": "payload",
-        "valueType": "msg",
-        "width": 3,
-        "height": 3,
-        "gtype": "gauge-half",
-        "gstyle": "needle",
-        "title": "gauge",
-        "alwaysShowTitle": false,
-        "floatingTitlePosition": "top-left",
-        "units": "units",
-        "icon": "",
-        "prefix": "",
-        "suffix": "",
-        "segments": [
-            {
-                "from": "0",
-                "color": "#5cd65c",
-                "text": "",
-                "textType": "label"
-            },
-            {
-                "from": "4",
-                "color": "#ffc800",
-                "text": "",
-                "textType": "label"
-            },
-            {
-                "from": "7",
-                "color": "#ea5353",
-                "text": "",
-                "textType": "label"
-            }
-        ],
-        "min": 0,
-        "max": "50",
-        "sizeThickness": 16,
-        "sizeGap": 4,
-        "sizeKeyThickness": 8,
-        "styleRounded": true,
-        "styleGlow": false,
-        "className": "",
-        "x": 830,
-        "y": 180,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "73c55b5d31aa1176",
-        "type": "ui-gauge",
-        "z": "c2fa9e34c92f937d",
-        "name": "Soil moisture (%)",
+        "z": "697288345ed13a06",
+        "name": "Humidity (%)",
         "group": "f9ee868b29e0a550",
         "order": 5,
         "value": "payload",
@@ -1451,19 +1509,41 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 790,
-        "y": 240,
+        "x": 829,
+        "y": 154.3333282470703,
         "wires": [
             []
         ]
     },
     {
-        "id": "1d3dbb68613761ac",
+        "id": "fcf317d7a39d277a",
+        "type": "mqtt in",
+        "z": "c2fa9e34c92f937d",
+        "name": "",
+        "topic": "field_b/lora_data",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "505ef1bf094f0b65",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 160,
+        "wires": [
+            [
+                "8bf1170b144e77a1",
+                "8c0362f31928f446"
+            ]
+        ]
+    },
+    {
+        "id": "4324333856c1c120",
         "type": "ui-gauge",
         "z": "c2fa9e34c92f937d",
-        "name": "Light level",
-        "group": "f9ee868b29e0a550",
-        "order": 4,
+        "name": "Temperature (°C)",
+        "group": "302b2626c211e6e2",
+        "order": 7,
         "value": "payload",
         "valueType": "msg",
         "width": 3,
@@ -1498,41 +1578,168 @@
             }
         ],
         "min": 0,
-        "max": "1000",
+        "max": "50",
         "sizeThickness": 16,
         "sizeGap": 4,
         "sizeKeyThickness": 8,
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 760,
-        "y": 320,
+        "x": 710,
+        "y": 120,
         "wires": [
             []
         ]
     },
     {
-        "id": "f38fbd863d04fa1b",
+        "id": "eff3f166f555b13f",
+        "type": "ui-gauge",
+        "z": "c2fa9e34c92f937d",
+        "name": "Soil moisture (%)",
+        "group": "302b2626c211e6e2",
+        "order": 8,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "gauge",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "4",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 710,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8bf1170b144e77a1",
         "type": "function",
         "z": "c2fa9e34c92f937d",
         "name": "Parse Lora data",
-        "func": "const raw = msg.payload.toString();\nconst parsed = {};\n\nraw.split(\",\").forEach(pair => {\n    const [key, value] = pair.split(\":\");\n    if (key && value !== undefined) {\n        parsed[key.trim()] = parseFloat(value);\n    }\n});\n\n// Build separate messages — one per sensor — each as plain numeric payload,\n// matching the format Field A's existing flows expect\nreturn [\n    { payload: parsed.H, topic: \"field_a/humidity\" },\n    { payload: parsed.T, topic: \"field_a/temperature\" },\n    { payload: parsed.S, topic: \"field_a/moisture\" }\n];",
+        "func": "// Incoming payload like: \"FIELD_A,TEMP=28.5,HUM=75.0,MOIST=60,COUNT=95\"\nconst raw = msg.payload.toString();\nconst parts = raw.split(\",\");\n\nconst fieldId = parts.shift();           // pull off \"FIELD_A\"\nconst fieldPrefix = fieldId.toLowerCase(); // \"field_a\"\n\nconst parsed = {};\nparts.forEach(pair => {\n    const [key, value] = pair.split(\"=\");\n    if (key && value !== undefined) {\n        parsed[key.trim()] = parseFloat(value);\n    }\n});\n\n// parsed now looks like: { TEMP: 28.5, HUM: 75.0, MOIST: 60, COUNT: 95 }\nreturn [\n    { payload: parsed.TEMP,  topic: `${fieldPrefix}/temperature` },\n    { payload: parsed.HUM,   topic: `${fieldPrefix}/humidity` },\n    { payload: parsed.MOIST, topic: `${fieldPrefix}/moisture` },\n    { payload: parsed.COUNT, topic: `${fieldPrefix}/count` }\n];",
         "outputs": 3,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 440,
-        "y": 180,
+        "x": 360,
+        "y": 160,
         "wires": [
-            [],
             [
-                "580141735ab55711"
+                "4324333856c1c120"
             ],
             [
-                "73c55b5d31aa1176"
+                "823eed5e8361e3e8"
+            ],
+            [
+                "eff3f166f555b13f"
             ]
+        ]
+    },
+    {
+        "id": "8c0362f31928f446",
+        "type": "debug",
+        "z": "c2fa9e34c92f937d",
+        "name": "debug field b",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "823eed5e8361e3e8",
+        "type": "ui-gauge",
+        "z": "c2fa9e34c92f937d",
+        "name": "Humidity (%)",
+        "group": "302b2626c211e6e2",
+        "order": 5,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "gauge",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "4",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "7",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 689,
+        "y": 174.3333282470703,
+        "wires": [
+            []
         ]
     },
     {
@@ -3832,7 +4039,7 @@
         "height": 8,
         "className": "",
         "interpolation": "linear",
-        "x": 390,
+        "x": 710,
         "y": 220,
         "wires": [
             []
@@ -3850,7 +4057,7 @@
         "y": 220,
         "wires": [
             [
-                "669c21be37323233"
+                "a401f9af3554ad2e"
             ]
         ]
     },
@@ -3990,7 +4197,7 @@
         "className": "",
         "interpolation": "linear",
         "x": 420,
-        "y": 380,
+        "y": 480,
         "wires": [
             []
         ]
@@ -4004,7 +4211,7 @@
             "435cbc156f8b67f9"
         ],
         "x": 195,
-        "y": 380,
+        "y": 480,
         "wires": [
             [
                 "7cda6b83b0dc9072"
@@ -4020,7 +4227,7 @@
             "029b95c4fa5cca36"
         ],
         "x": 195,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "427bf87890f1adb0",
@@ -4041,7 +4248,7 @@
         "finalize": "",
         "libs": [],
         "x": 390,
-        "y": 460,
+        "y": 560,
         "wires": [
             [
                 "c46320386a2fdcb7",
@@ -4070,7 +4277,7 @@
         "value": "payload",
         "valueType": "msg",
         "x": 610,
-        "y": 480,
+        "y": 580,
         "wires": []
     },
     {
@@ -4080,7 +4287,7 @@
         "group": "04fb1d5393761980",
         "name": "Cumulative water usage (L)",
         "label": "Cumulative water usage (L)",
-        "order": 6,
+        "order": 7,
         "chartType": "line",
         "category": "topic",
         "categoryType": "msg",
@@ -4130,7 +4337,7 @@
         "className": "",
         "interpolation": "linear",
         "x": 640,
-        "y": 560,
+        "y": 660,
         "wires": [
             []
         ]
@@ -4162,7 +4369,7 @@
             "bf636c111dc3faf0"
         ],
         "x": 205,
-        "y": 720,
+        "y": 820,
         "wires": [
             [
                 "5b20a8534bd3d823"
@@ -4182,7 +4389,7 @@
         "finalize": "",
         "libs": [],
         "x": 380,
-        "y": 720,
+        "y": 820,
         "wires": [
             []
         ]
@@ -4200,7 +4407,7 @@
         "finalize": "",
         "libs": [],
         "x": 400,
-        "y": 640,
+        "y": 740,
         "wires": [
             [
                 "8065ceb7080f9a78"
@@ -4256,7 +4463,211 @@
         "styleGlow": false,
         "className": "",
         "x": 620,
-        "y": 640,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0095d306b8981ce3",
+        "type": "mqtt in",
+        "z": "9e7d7c12d1458246",
+        "name": "",
+        "topic": "field_main/temperature/replay",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "505ef1bf094f0b65",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "c0823cda6d78bc42"
+            ]
+        ]
+    },
+    {
+        "id": "c0823cda6d78bc42",
+        "type": "function",
+        "z": "9e7d7c12d1458246",
+        "name": "Format replay points",
+        "func": "// Incoming: msg.payload = { value: 24.3, ts: 1718900000 }\n// ui-chart expects either a number, or { x, y } for explicit timestamp\nmsg.payload = {\n    x: msg.payload.ts * 1000,   // ui-chart wants milliseconds\n    y: msg.payload.value\n};\n\n// Tag the series so the chart distinguishes it from live data\nmsg.topic = \"Replayed\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 160,
+        "wires": [
+            [
+                "669c21be37323233"
+            ]
+        ]
+    },
+    {
+        "id": "a401f9af3554ad2e",
+        "type": "function",
+        "z": "9e7d7c12d1458246",
+        "name": "Tag live points",
+        "func": "msg.topic = \"Live\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 220,
+        "wires": [
+            [
+                "669c21be37323233"
+            ]
+        ]
+    },
+    {
+        "id": "a10295949cc65f9f",
+        "type": "ui-chart",
+        "z": "9e7d7c12d1458246",
+        "group": "04fb1d5393761980",
+        "name": "Humidity Level (%)",
+        "label": "chart",
+        "order": 6,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "0",
+        "ymax": "100",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "2",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 8,
+        "className": "",
+        "interpolation": "linear",
+        "x": 370,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5fefb219b05854cd",
+        "type": "link in",
+        "z": "9e7d7c12d1458246",
+        "name": "field_main_humidity_out",
+        "links": [
+            "6984d9f55747fa13"
+        ],
+        "x": 205,
+        "y": 380,
+        "wires": [
+            [
+                "a10295949cc65f9f"
+            ]
+        ]
+    },
+    {
+        "id": "a9f29c4559bbe12a",
+        "type": "mqtt in",
+        "z": "c847ebdb2241b7d6",
+        "name": "",
+        "topic": "field_main/fault/sensor",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "505ef1bf094f0b65",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 100,
+        "wires": [
+            [
+                "a2efaa7941a88908"
+            ]
+        ]
+    },
+    {
+        "id": "a2efaa7941a88908",
+        "type": "function",
+        "z": "c847ebdb2241b7d6",
+        "name": "function 1",
+        "func": "let alerts = flow.get(\"active_alerts\") || {};\nconst fieldKey = \"field_a_sensor\";\n\nif (msg.payload === null || msg.payload === \"\" || !msg.payload.sensor) {\n    // All-clear message — remove the alert if it existed\n    delete alerts[fieldKey];\n} else {\n    alerts[fieldKey] = {\n        type: \"Sensor failure\",\n        field: \"Field A\",\n        details: `${msg.payload.sensor} (${msg.payload.reason})`,\n        since: new Date().toLocaleTimeString()\n    };\n}\n\nflow.set(\"active_alerts\", alerts);\nmsg.payload = Object.values(alerts);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 100,
+        "wires": [
+            [
+                "5cf659e9092a1afe"
+            ]
+        ]
+    },
+    {
+        "id": "5cf659e9092a1afe",
+        "type": "ui-template",
+        "z": "c847ebdb2241b7d6",
+        "group": "2138b2ca33187e6e",
+        "page": "",
+        "ui": "",
+        "name": "Alerts",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "head": "",
+        "format": "<template>\n  <div v-if=\"!msg || !msg.payload || msg.payload.length === 0\"\n       style=\"padding: 12px; background: #1a3a1a; color: #6f6; border-radius: 4px;\">\n    ✓ All systems normal\n  </div>\n  <div v-else>\n    <div v-for=\"(alert, i) in msg.payload\" :key=\"i\"\n         style=\"padding: 12px; margin-bottom: 6px; background: #3a1a1a; color: #f88; border-left: 4px solid #f44; border-radius: 4px;\">\n      <strong>⚠ {{ alert.type }} — {{ alert.field }}</strong><br>\n      <span style=\"font-size: 0.9em;\">{{ alert.details }}</span><br>\n      <span style=\"font-size: 0.8em; opacity: 0.7;\">since {{ alert.since }}</span>\n    </div>\n  </div>\n</template>",
+        "storeOutMessages": true,
+        "passthru": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 470,
+        "y": 100,
         "wires": [
             []
         ]

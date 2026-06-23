@@ -46,3 +46,8 @@ The contract, written down for your future self and your teammate:
 
 Live: published to field_a/temperature as a plain string number, same as now.
 Replay: published to field_a/temperature/replay as JSON: {"value": 24.3, "ts": 1718900000} where ts is a Unix timestamp in seconds at the time the reading was originally taken.
+
+Define the topic contract first. Lock these in now so the firmware-side work later just slots in:
+
+field_a/fault/sensor — payload like {"sensor": "moisture", "reason": "stuck"} when a sensor fails. Empty/null payload means "all clear."
+gateway/node_status — payload like {"node": "field_b", "status": "OFFLINE"} whenever a node's status changes.
