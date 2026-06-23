@@ -5,6 +5,7 @@
 #include <Wire.h>
 #include "SSD1306Wire.h"
 #include <DHT.h>
+#include <time.h>
 
 // =====================================================
 // OLED - Heltec WiFi LoRa 32 V2
@@ -15,7 +16,7 @@
 SSD1306Wire display(0x3c, OLED_SDA, OLED_SCL);
 
 // =====================================================
-// LoRa Pins - Heltec WiFi LoRa 32 V2
+// LoRa Pins
 // =====================================================
 #define LORA_SS   18
 #define LORA_RST  14
@@ -23,7 +24,7 @@ SSD1306Wire display(0x3c, OLED_SDA, OLED_SCL);
 #define LORA_BAND 915E6
 
 // =====================================================
-// WiFi / MQTT - move these to a separate secrets header before publishing to GitHub
+// WiFi / MQTT
 // =====================================================
 const char* ssid     = "Galaxy A56 5G E79B";
 const char* password = "jw2v6iktsjsrjep";
@@ -32,6 +33,13 @@ const int   mqtt_port   = 1883;
 
 WiFiClient   espClient;
 PubSubClient client(espClient);
+
+// =====================================================
+// NTP (Sri Lanka timezone IST = UTC+5:30 = 19800 sec)
+// =====================================================
+const char* ntpServer = "pool.ntp.org";
+const long gmtOffsetSec = 19800;
+const int  daylightOffsetSec = 0;
 
 // =====================================================
 // Local Sensors and Valve = field_main
@@ -51,33 +59,86 @@ DHT dht(DHT_PIN, DHT_TYPE);
 // =====================================================
 unsigned long lastPublish     = 0;
 unsigned long lastStaleCheck  = 0;
+unsigned long lastDecisionRun = 0;
 const long publishInterval    = 5000;
 const long staleCheckInterval = 5000;
-const long nodeTimeoutMs      = 30000;   // mark OFFLINE if silent this long
+const long decisionInterval   = 5000;
+const long nodeTimeoutMs      = 30000;
 
 // =====================================================
-// Dynamic Binding Registry (in-memory, 3 slots)
+// A3 - Moving Average Filter
 // =====================================================
-struct BindingEntry {
-  String slot;            // "field_a" / "field_b" / "field_c"
-  String boundUid;        // empty if unbound
-  bool   online;          // last-known status
-  unsigned long lastSeen; // millis() of last received packet
-  // Cached latest readings (populated as packets arrive)
+const int WINDOW_SIZE = 5;   // last N readings
+
+struct MovingAverage {
+  float buf[10];   // headroom in case you bump WINDOW_SIZE
+  int   count;
+  int   idx;
+};
+
+void maInit(MovingAverage& m) {
+  m.count = 0;
+  m.idx = 0;
+}
+
+float maPush(MovingAverage& m, float v) {
+  m.buf[m.idx] = v;
+  m.idx = (m.idx + 1) % WINDOW_SIZE;
+  if (m.count < WINDOW_SIZE) m.count++;
+  float sum = 0;
+  for (int i = 0; i < m.count; i++) sum += m.buf[i];
+  return sum / m.count;
+}
+
+// =====================================================
+// Per-field state
+// =====================================================
+// A "field" here means anything the gateway controls — field_main plus the
+// three bindable LoRa slots. All share the same struct so the decision engine
+// can iterate uniformly.
+struct FieldState {
+  String name;             // "field_main" / "field_a" / ...
+  String boundUid;         // empty for field_main, populated by binding for others
+  bool   isLocal;          // true for field_main (sensors+valve wired directly)
+  bool   online;
+  unsigned long lastSeen;
+
+  // Raw latest readings
   float temperature;
   float humidity;
   float moisture;
+  float rain;        // 0-100, higher = wetter
+  float light;       // 0-100
   bool  hasData;
+
+  // A3 smoothed readings
+  MovingAverage tempMA;
+  MovingAverage moistMA;
+
+  // A4 dynamic thresholds (settable from dashboard)
+  float moistureThreshold;  // engine fires irrigation if score-based logic says so
+  float lightThreshold;     // dashboard-configurable, used as score input
+
+  // Mode: true = AUTO (engine runs), false = MANUAL (dashboard commands win)
+  bool  autoMode;
+
+  // External weather hint from dashboard (1=rain forecast, 0=clear)
+  bool  weatherRainHint;
+
+  // Current valve state (what we last commanded)
+  bool  valveOpen;
+
+  // Last computed irrigation score (0..100), for publishing/debug
+  float lastScore;
 };
 
-const int NUM_SLOTS = 3;
-BindingEntry slots[NUM_SLOTS] = {
-  { "field_a", "", false, 0, 0, 0, 0, false },
-  { "field_b", "", false, 0, 0, 0, 0, false },
-  { "field_c", "", false, 0, 0, 0, 0, false }
-};
+const int FIELD_MAIN = 0;
+const int NUM_FIELDS = 4;   // main + 3 LoRa slots
+FieldState fields[NUM_FIELDS];
 
-// Pending unknown UIDs we've already announced (so we don't spam new-node messages)
+// =====================================================
+// Pending unknown UIDs we've announced (so we don't spam)
+// =====================================================
 const int MAX_PENDING = 8;
 String announcedUids[MAX_PENDING];
 int announcedCount = 0;
@@ -96,18 +157,18 @@ void showMessage(String l1, String l2 = "", String l3 = "", String l4 = "") {
 }
 
 // =====================================================
-// Registry helpers
+// Field-state helpers
 // =====================================================
-int findSlotByUid(const String& uid) {
-  for (int i = 0; i < NUM_SLOTS; i++) {
-    if (slots[i].boundUid == uid && uid.length() > 0) return i;
+int findFieldByUid(const String& uid) {
+  for (int i = 1; i < NUM_FIELDS; i++) {
+    if (fields[i].boundUid == uid && uid.length() > 0) return i;
   }
   return -1;
 }
 
-int findSlotByName(const String& name) {
-  for (int i = 0; i < NUM_SLOTS; i++) {
-    if (slots[i].slot == name) return i;
+int findFieldByName(const String& name) {
+  for (int i = 0; i < NUM_FIELDS; i++) {
+    if (fields[i].name == name) return i;
   }
   return -1;
 }
@@ -120,38 +181,94 @@ bool alreadyAnnounced(const String& uid) {
 }
 
 void rememberAnnounced(const String& uid) {
-  if (announcedCount < MAX_PENDING) {
-    announcedUids[announcedCount++] = uid;
+  if (announcedCount < MAX_PENDING) announcedUids[announcedCount++] = uid;
+}
+
+// =====================================================
+// Initialize field state
+// =====================================================
+void initFields() {
+  fields[0] = { "field_main", "",   true,  true,  0,
+                0,0,0,0,0, false, {}, {}, 40.0, 50.0, true, false, false, 0 };
+  fields[1] = { "field_a",    "",   false, false, 0,
+                0,0,0,0,0, false, {}, {}, 40.0, 50.0, true, false, false, 0 };
+  fields[2] = { "field_b",    "",   false, false, 0,
+                0,0,0,0,0, false, {}, {}, 40.0, 50.0, true, false, false, 0 };
+  fields[3] = { "field_c",    "",   false, false, 0,
+                0,0,0,0,0, false, {}, {}, 40.0, 50.0, true, false, false, 0 };
+
+  for (int i = 0; i < NUM_FIELDS; i++) {
+    maInit(fields[i].tempMA);
+    maInit(fields[i].moistMA);
   }
 }
 
 // =====================================================
-// WiFi Connect
+// WiFi / NTP
 // =====================================================
 void connectWiFi() {
   showMessage("WiFi Connecting", ssid);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
-
   int retry = 0;
   while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-    retry++;
+    delay(500); retry++;
     showMessage("WiFi Connecting", "Please wait...", "Retry: " + String(retry));
-    if (retry > 40) {
-      showMessage("WiFi Failed", "Restarting...");
-      delay(2000);
-      ESP.restart();
-    }
+    if (retry > 40) { ESP.restart(); }
   }
-  Serial.println("\nWiFi connected: " + WiFi.localIP().toString());
   showMessage("WiFi Connected", WiFi.localIP().toString());
   delay(1000);
 }
 
+void initNTP() {
+  configTime(gmtOffsetSec, daylightOffsetSec, ntpServer);
+  showMessage("NTP Syncing", "...");
+  struct tm timeinfo;
+  int retry = 0;
+  while (!getLocalTime(&timeinfo) && retry < 10) { delay(500); retry++; }
+  if (retry < 10) {
+    char buf[20];
+    strftime(buf, sizeof(buf), "%H:%M:%S", &timeinfo);
+    showMessage("NTP OK", String(buf));
+  } else {
+    showMessage("NTP Failed", "Using fallback");
+  }
+  delay(1000);
+}
+
+// Returns hour of day 0..23. Falls back to a rotating value if NTP failed,
+// so demos don't break entirely without internet.
+int currentHour() {
+  struct tm timeinfo;
+  if (getLocalTime(&timeinfo)) return timeinfo.tm_hour;
+  // Fallback: fake hour from millis to keep the demo alive
+  return (millis() / 60000) % 24;
+}
+
 // =====================================================
-// Send LoRa command to a remote node (by UID)
+// LoRa Init
+// =====================================================
+void initLoRa() {
+  LoRa.setPins(LORA_SS, LORA_RST, LORA_DIO0);
+  if (!LoRa.begin(LORA_BAND)) {
+    showMessage("LoRa Failed");
+    while (true) {}
+  }
+  showMessage("LoRa Ready");
+  delay(800);
+}
+
+void initOLED() {
+  pinMode(OLED_RST, OUTPUT);
+  digitalWrite(OLED_RST, LOW); delay(50);
+  digitalWrite(OLED_RST, HIGH); delay(50);
+  display.init();
+  display.flipScreenVertically();
+  display.setFont(ArialMT_Plain_10);
+}
+
+// =====================================================
+// LoRa command helper
 // =====================================================
 void sendLoRaCommand(const String& uid, const String& cmd) {
   String packet = "UID=" + uid + ",CMD=" + cmd;
@@ -159,7 +276,94 @@ void sendLoRaCommand(const String& uid, const String& cmd) {
   LoRa.print(packet);
   LoRa.endPacket();
   Serial.println("LoRa TX: " + packet);
-  showMessage("LoRa TX", uid, cmd);
+}
+
+// =====================================================
+// Apply a valve decision to a field (drives hardware + publishes state)
+// =====================================================
+void applyValveDecision(FieldState& f, bool open) {
+  // Avoid re-publishing identical state to reduce noise
+  bool changed = (f.valveOpen != open);
+  f.valveOpen = open;
+
+  if (f.isLocal) {
+    digitalWrite(VALVE_CONTROL_PIN, open ? HIGH : LOW);
+  } else if (f.boundUid.length() > 0) {
+    if (changed) sendLoRaCommand(f.boundUid, open ? "VALVE_ON" : "VALVE_OFF");
+  }
+
+  // Always publish the (re-)affirmed state so the dashboard knows
+  client.publish((f.name + "/valve").c_str(), open ? "OPEN" : "CLOSE");
+}
+
+// =====================================================
+// A5/A6/A7 SCORING ENGINE
+// =====================================================
+//
+// Inputs (all normalized 0..100):
+//   - moisture (smoothed, lower = drier = needs water = HIGHER score)
+//   - rain (current rain sensor or weather hint; if raining, score crashes)
+//   - light (proxy for sun/evaporation; high light at noon = penalize)
+//   - time of day (morning permissive, noon avoid, evening permissive, night ok)
+//
+// Output: irrigation score 0..100. Valve opens if score >= 60.
+//
+// The score is a weighted blend:
+//   base       = moisture_demand (how dry the soil is)
+//   rain_veto  = strong negative if raining
+//   time_mult  = morning 1.1, noon 0.5, evening 1.0, night 0.9
+//   light_pen  = high light slightly reduces (waters less when blazing sun)
+// =====================================================
+float computeScore(const FieldState& f) {
+  // moisture_demand: at 0% moisture demand=100, at 100% moisture demand=0
+  float moistureDemand = constrain(100.0f - f.moisture, 0.0f, 100.0f);
+
+  // rain factor: if rain reading or weather hint says rain, kill the score
+  bool isRainingNow = (f.rain > 60.0f) || f.weatherRainHint;
+  float rainFactor = isRainingNow ? 0.1f : 1.0f;
+
+  // time-of-day multiplier
+  int hour = currentHour();
+  float timeMult;
+  if      (hour >= 5  && hour < 10) timeMult = 1.1f;   // morning - encourage
+  else if (hour >= 10 && hour < 15) timeMult = 0.5f;   // noon - discourage
+  else if (hour >= 15 && hour < 19) timeMult = 1.0f;   // afternoon
+  else                              timeMult = 0.9f;   // evening/night
+
+  // light penalty: at light=100 reduce score by 20%, at 0 no reduction
+  float lightPen = 1.0f - (f.light / 500.0f);  // gentle
+
+  float score = moistureDemand * rainFactor * timeMult * lightPen;
+  return constrain(score, 0.0f, 100.0f);
+}
+
+// =====================================================
+// Run the decision engine for a single field
+// =====================================================
+void runDecisionEngine(FieldState& f) {
+  // MANUAL mode: do nothing; whatever the dashboard set sticks
+  if (!f.autoMode) return;
+
+  // Need data before deciding
+  if (!f.hasData) return;
+
+  // For remote fields, only decide if they're online (avoid commanding
+  // an offline node, which would just queue a doomed LoRa transmission)
+  if (!f.isLocal && !f.online) return;
+
+  float score = computeScore(f);
+  f.lastScore = score;
+
+  // Threshold for opening is itself dynamic: dashboard's moisture threshold
+  // implicitly informs the open/close decision via the score boundary.
+  // Use 60 as the score cutoff; adjust if you want.
+  bool shouldOpen = score >= 60.0f;
+
+  // Also publish the score itself so the dashboard can chart it
+  client.publish((f.name + "/score").c_str(), String(score, 1).c_str());
+  client.publish((f.name + "/mode").c_str(), "AUTO");
+
+  applyValveDecision(f, shouldOpen);
 }
 
 // =====================================================
@@ -169,57 +373,65 @@ void callback(char* topic, byte* payload, unsigned int length) {
   String message = "";
   for (unsigned int i = 0; i < length; i++) message += (char)payload[i];
   message.trim();
-
   String topicStr = String(topic);
+
   Serial.println("MQTT IN [" + topicStr + "]: " + message);
 
-  // ----- Local valve control -----
-  if (topicStr == "field_main/control") {
-    if (message == "ON" || message == "OPEN") {
-      digitalWrite(VALVE_CONTROL_PIN, HIGH);
-    } else if (message == "OFF" || message == "CLOSE") {
-      digitalWrite(VALVE_CONTROL_PIN, LOW);
+  // ----- Per-field commands and threshold updates -----
+  // Topics look like field_x/command/valve, field_x/threshold/moisture, etc.
+  int firstSlash = topicStr.indexOf('/');
+  if (firstSlash > 0) {
+    String fieldName = topicStr.substring(0, firstSlash);
+    String rest      = topicStr.substring(firstSlash + 1);
+    int idx = findFieldByName(fieldName);
+
+    if (idx >= 0) {
+      FieldState& f = fields[idx];
+
+      // Manual valve command (only honored in MANUAL mode)
+      if (rest == "command/valve") {
+        if (!f.autoMode) {
+          bool open = (message == "OPEN" || message == "ON");
+          applyValveDecision(f, open);
+        } else {
+          Serial.println("Ignoring manual valve cmd while in AUTO");
+        }
+        return;
+      }
+
+      // Mode toggle
+      if (rest == "command/mode") {
+        f.autoMode = (message == "AUTO" || message == "auto");
+        client.publish((f.name + "/mode").c_str(), f.autoMode ? "AUTO" : "MANUAL");
+        return;
+      }
+
+      // Dynamic threshold updates from dashboard
+      if (rest == "threshold/moisture") { f.moistureThreshold = message.toFloat(); return; }
+      if (rest == "threshold/light")    { f.lightThreshold    = message.toFloat(); return; }
+
+      // Weather hint from dashboard (publish 1 or 0 to e.g. field_main/weather/rain)
+      if (rest == "weather/rain")       { f.weatherRainHint   = (message == "1" || message == "true"); return; }
     }
-    showMessage("field_main CMD", message, "Local valve");
-    return;
   }
 
-  // ----- Remote field valve commands -> forwarded over LoRa to bound UID -----
-  if (topicStr == "field_a/control" || topicStr == "field_b/control" || topicStr == "field_c/control") {
-    String slotName = topicStr.substring(0, topicStr.indexOf('/'));
-    int idx = findSlotByName(slotName);
-    if (idx >= 0 && slots[idx].boundUid.length() > 0) {
-      sendLoRaCommand(slots[idx].boundUid, message);
-    } else {
-      Serial.println("No UID bound to " + slotName + " yet, dropping command");
-    }
-    return;
-  }
-
-  // ----- Binding command from dashboard -----
+  // ----- Binding command -----
   if (topicStr == "gateway/command/bind") {
-    // Expected payload: {"uid":"NODE-XYZ","slot":"field_b"}
     int uidStart = message.indexOf("\"uid\":\"") + 7;
     int uidEnd   = message.indexOf("\"", uidStart);
     int slotStart = message.indexOf("\"slot\":\"") + 8;
     int slotEnd   = message.indexOf("\"", slotStart);
+    if (uidStart < 7 || slotStart < 8) return;
 
-    if (uidStart < 7 || slotStart < 8) {
-      Serial.println("Malformed bind command");
-      return;
-    }
     String uid  = message.substring(uidStart, uidEnd);
     String slot = message.substring(slotStart, slotEnd);
 
-    int idx = findSlotByName(slot);
-    if (idx >= 0) {
-      slots[idx].boundUid = uid;
-      slots[idx].lastSeen = millis();
-      slots[idx].online = true;
-      Serial.println("BIND: " + uid + " -> " + slot);
+    int idx = findFieldByName(slot);
+    if (idx > 0) {  // can't bind to field_main (idx 0)
+      fields[idx].boundUid = uid;
+      fields[idx].lastSeen = millis();
+      fields[idx].online = true;
       showMessage("Bind OK", uid, "-> " + slot);
-    } else {
-      Serial.println("Unknown slot: " + slot);
     }
     return;
   }
@@ -231,91 +443,73 @@ void callback(char* topic, byte* payload, unsigned int length) {
 void reconnectMQTT() {
   while (!client.connected()) {
     showMessage("MQTT Connecting", mqtt_server);
-    String clientId = "Heltec_LoRa_Gateway_" + String(random(0xffff), HEX);
+    String clientId = "Heltec_Gateway_" + String(random(0xffff), HEX);
     if (client.connect(clientId.c_str())) {
-      Serial.println("MQTT connected");
-      client.subscribe("field_main/control");
-      client.subscribe("field_a/control");
-      client.subscribe("field_b/control");
-      client.subscribe("field_c/control");
+      // Per-field control topics
+      const char* fieldNames[] = {"field_main", "field_a", "field_b", "field_c"};
+      for (int i = 0; i < 4; i++) {
+        String f = fieldNames[i];
+        client.subscribe((f + "/command/valve").c_str());
+        client.subscribe((f + "/command/mode").c_str());
+        client.subscribe((f + "/threshold/moisture").c_str());
+        client.subscribe((f + "/threshold/light").c_str());
+        client.subscribe((f + "/weather/rain").c_str());
+      }
       client.subscribe("gateway/command/bind");
       showMessage("MQTT Connected", "Subscribed OK");
-      delay(1000);
+      delay(800);
     } else {
-      showMessage("MQTT Failed", "rc=" + String(client.state()), "Retrying...");
       delay(2000);
     }
   }
 }
 
 // =====================================================
-// OLED Init
+// Read local sensors into field_main state
 // =====================================================
-void initOLED() {
-  pinMode(OLED_RST, OUTPUT);
-  digitalWrite(OLED_RST, LOW); delay(50);
-  digitalWrite(OLED_RST, HIGH); delay(50);
-  display.init();
-  display.flipScreenVertically();
-  display.setFont(ArialMT_Plain_10);
-  showMessage("Heltec Booting", "OLED OK");
-  delay(1000);
-}
-
-// =====================================================
-// LoRa Init
-// =====================================================
-void initLoRa() {
-  LoRa.setPins(LORA_SS, LORA_RST, LORA_DIO0);
-  if (!LoRa.begin(LORA_BAND)) {
-    showMessage("LoRa Failed", "Check frequency", "Check antenna");
-    while (true) {}
-  }
-  showMessage("LoRa Ready", "Frequency OK");
-  delay(1000);
-}
-
-// =====================================================
-// Publish field_main sensors (with topic names matching the dashboard)
-// =====================================================
-void readAndPublishFieldMainSensors() {
-  float humidity    = dht.readHumidity();
-  float temperature = dht.readTemperature();
-  if (isnan(humidity) || isnan(temperature)) {
-    showMessage("DHT11 Error", "Check wiring", "Data pin: GPIO13");
+void readFieldMainSensors() {
+  FieldState& f = fields[FIELD_MAIN];
+  float h = dht.readHumidity();
+  float t = dht.readTemperature();
+  if (isnan(h) || isnan(t)) {
+    Serial.println("DHT11 read failed");
     return;
   }
 
   int lightRaw    = analogRead(LIGHT_SENSOR_PIN);
   int moistureRaw = analogRead(MOISTURE_SENSOR_PIN);
   int rainRaw     = analogRead(RAIN_SENSOR_PIN);
-  int valveFb     = digitalRead(VALVE_FEEDBACK_PIN);
 
-  float lightPercent    = constrain(map(lightRaw,    0, 4095,   0, 100), 0, 100);
-  float moisturePercent = constrain(map(moistureRaw, 0, 4095, 100,   0), 0, 100);
-  float rainPercent     = constrain(map(rainRaw,     0, 4095, 100,   0), 0, 100);
+  f.humidity    = h;
+  f.temperature = maPush(f.tempMA, t);                                         // A3 smoothed
+  float rawMoisture = constrain(map(moistureRaw, 0, 4095, 100, 0), 0, 100);
+  f.moisture    = maPush(f.moistMA, rawMoisture);                              // A3 smoothed
+  f.light       = constrain(map(lightRaw,    0, 4095,   0, 100), 0, 100);
+  f.rain        = constrain(map(rainRaw,     0, 4095, 100,   0), 0, 100);
+  f.hasData     = true;
+  f.lastSeen    = millis();
+  f.online      = true;
 
-  // Topics renamed to match the dashboard's expectations
-  client.publish("field_main/temperature", String(temperature, 1).c_str());
-  client.publish("field_main/humidity",    String(humidity, 1).c_str());
-  client.publish("field_main/light",       String(lightPercent, 1).c_str());
-  client.publish("field_main/moisture",    String(moisturePercent, 1).c_str());
-  client.publish("field_main/rain",        String(rainPercent, 1).c_str());
-  client.publish("field_main/valve",       valveFb ? "OPEN" : "CLOSE");
+  // Publish raw + smoothed
+  client.publish("field_main/temperature", String(f.temperature, 1).c_str());
+  client.publish("field_main/humidity",    String(f.humidity, 1).c_str());
+  client.publish("field_main/light",       String(f.light, 1).c_str());
+  client.publish("field_main/moisture",    String(f.moisture, 1).c_str());
+  client.publish("field_main/rain",        String(f.rain, 1).c_str());
 }
 
 // =====================================================
-// Parse one KEY=VALUE pair into the right field of an entry
+// Apply KEY=VALUE pair into a FieldState
 // =====================================================
-void applyPair(BindingEntry& e, const String& key, const String& value) {
-  if      (key == "TEMP")  e.temperature = value.toFloat();
-  else if (key == "HUM")   e.humidity    = value.toFloat();
-  else if (key == "MOIST") e.moisture    = value.toFloat();
+void applyPair(FieldState& f, const String& key, const String& value) {
+  if      (key == "TEMP")  f.temperature = maPush(f.tempMA, value.toFloat());
+  else if (key == "HUM")   f.humidity    = value.toFloat();
+  else if (key == "MOIST") f.moisture    = maPush(f.moistMA, value.toFloat());
+  else if (key == "LIGHT") f.light       = value.toFloat();
 }
 
 // =====================================================
-// Handle a LoRa packet with new UID-based format:
-//   UID=NODE-A1B2C3,TEMP=26.5,HUM=70.0,MOIST=55
+// Handle one LoRa packet (UID=...,TEMP=...,HUM=...,MOIST=...)
 // =====================================================
 void handleLoRaPacket() {
   int packetSize = LoRa.parsePacket();
@@ -324,21 +518,16 @@ void handleLoRaPacket() {
   String received = "";
   while (LoRa.available()) received += (char)LoRa.read();
   received.trim();
-
   int rssi = LoRa.packetRssi();
-  Serial.println("LoRa RX: " + received + "  RSSI=" + String(rssi));
 
-  // Split on commas
   String uid = "";
   String pairs[8];
   int pairCount = 0;
-
   int start = 0;
   while (start < received.length() && pairCount < 8) {
     int comma = received.indexOf(',', start);
     String token = (comma == -1) ? received.substring(start) : received.substring(start, comma);
     token.trim();
-
     int eq = token.indexOf('=');
     if (eq > 0) {
       String key = token.substring(0, eq);
@@ -346,72 +535,56 @@ void handleLoRaPacket() {
       if (key == "UID") uid = val;
       else              pairs[pairCount++] = token;
     }
-
     if (comma == -1) break;
     start = comma + 1;
   }
 
-  if (uid.length() == 0) {
-    Serial.println("Packet missing UID, ignored");
-    return;
-  }
+  if (uid.length() == 0) return;
 
-  int slotIdx = findSlotByUid(uid);
-
-  if (slotIdx == -1) {
-    // Unknown UID -> announce once for the binding dashboard to pick up
+  int idx = findFieldByUid(uid);
+  if (idx == -1) {
     if (!alreadyAnnounced(uid)) {
       rememberAnnounced(uid);
       String payload = "{\"uid\":\"" + uid + "\"}";
       client.publish("gateway/nodes/new", payload.c_str());
-      Serial.println("ANNOUNCED new UID: " + uid);
       showMessage("New node", uid, "Awaiting bind");
     }
     return;
   }
 
-  // Known UID -> cache values, update lastSeen, publish to slot topics
-  BindingEntry& e = slots[slotIdx];
-  e.lastSeen = millis();
-  if (!e.online) {
-    e.online = true;
-    String statusPayload = "{\"node\":\"" + e.slot + "\",\"status\":\"ONLINE\"}";
-    client.publish("gateway/node_status", statusPayload.c_str());
+  FieldState& f = fields[idx];
+  f.lastSeen = millis();
+  if (!f.online) {
+    f.online = true;
+    String s = "{\"node\":\"" + f.name + "\",\"status\":\"ONLINE\"}";
+    client.publish("gateway/node_status", s.c_str());
   }
-  e.hasData = true;
+  f.hasData = true;
 
   for (int i = 0; i < pairCount; i++) {
     int eq = pairs[i].indexOf('=');
-    String key = pairs[i].substring(0, eq);
-    String val = pairs[i].substring(eq + 1);
-    applyPair(e, key, val);
+    applyPair(f, pairs[i].substring(0, eq), pairs[i].substring(eq + 1));
   }
 
-  // Publish parsed values to per-slot topics matching the dashboard
-  client.publish((e.slot + "/temperature").c_str(), String(e.temperature, 1).c_str());
-  client.publish((e.slot + "/humidity").c_str(),    String(e.humidity, 1).c_str());
-  client.publish((e.slot + "/moisture").c_str(),    String(e.moisture, 1).c_str());
-  client.publish((e.slot + "/rssi").c_str(),        String(rssi).c_str());
-
-  showMessage("LoRa RX " + e.slot, "T=" + String(e.temperature, 1),
-              "M=" + String(e.moisture, 0), "RSSI=" + String(rssi));
+  client.publish((f.name + "/temperature").c_str(), String(f.temperature, 1).c_str());
+  client.publish((f.name + "/humidity").c_str(),    String(f.humidity, 1).c_str());
+  client.publish((f.name + "/moisture").c_str(),    String(f.moisture, 1).c_str());
+  client.publish((f.name + "/light").c_str(),       String(f.light, 1).c_str());
+  client.publish((f.name + "/rssi").c_str(),        String(rssi).c_str());
 }
 
 // =====================================================
-// Periodically check for nodes that have gone silent
+// Mark stale nodes offline
 // =====================================================
 void checkStaleNodes() {
   unsigned long now = millis();
-  for (int i = 0; i < NUM_SLOTS; i++) {
-    BindingEntry& e = slots[i];
-    if (e.boundUid.length() == 0) continue;       // unbound slots aren't expected to be online
-    if (!e.online) continue;                       // already offline, no change to report
-
-    if (now - e.lastSeen > nodeTimeoutMs) {
-      e.online = false;
-      String statusPayload = "{\"node\":\"" + e.slot + "\",\"status\":\"OFFLINE\"}";
-      client.publish("gateway/node_status", statusPayload.c_str());
-      Serial.println("STALE: " + e.slot + " (" + e.boundUid + ") marked OFFLINE");
+  for (int i = 1; i < NUM_FIELDS; i++) {
+    FieldState& f = fields[i];
+    if (f.boundUid.length() == 0 || !f.online) continue;
+    if (now - f.lastSeen > nodeTimeoutMs) {
+      f.online = false;
+      String s = "{\"node\":\"" + f.name + "\",\"status\":\"OFFLINE\"}";
+      client.publish("gateway/node_status", s.c_str());
     }
   }
 }
@@ -421,7 +594,7 @@ void checkStaleNodes() {
 // =====================================================
 void setup() {
   Serial.begin(115200);
-  delay(1000);
+  delay(800);
 
   pinMode(VALVE_CONTROL_PIN, OUTPUT);
   digitalWrite(VALVE_CONTROL_PIN, LOW);
@@ -430,16 +603,17 @@ void setup() {
   dht.begin();
   analogReadResolution(12);
 
+  initFields();
   initOLED();
-  showMessage("System Starting", "field_main local", "3 LoRa slots");
+  showMessage("Booting", "AgroSense Gateway");
   initLoRa();
   connectWiFi();
+  initNTP();
 
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
 
-  showMessage("System Ready", "LoRa + MQTT OK", "Awaiting nodes");
-  Serial.println("System Ready");
+  showMessage("System Ready", "Engine: AUTO", "Awaiting nodes");
 }
 
 // =====================================================
@@ -455,10 +629,14 @@ void loop() {
   unsigned long now = millis();
   if (now - lastPublish >= publishInterval) {
     lastPublish = now;
-    readAndPublishFieldMainSensors();
+    readFieldMainSensors();
   }
   if (now - lastStaleCheck >= staleCheckInterval) {
     lastStaleCheck = now;
     checkStaleNodes();
+  }
+  if (now - lastDecisionRun >= decisionInterval) {
+    lastDecisionRun = now;
+    for (int i = 0; i < NUM_FIELDS; i++) runDecisionEngine(fields[i]);
   }
 }
